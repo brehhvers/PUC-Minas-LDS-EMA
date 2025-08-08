@@ -2,14 +2,12 @@
 Escreva um ou dois parágrafo resumindo o objetivo do seu projeto.
 
 ## Integrantes
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+* Brenda Evers
+* Pedro Augusto Ferreira de Paula
+* Pedro Henrique Barbosa Montandon de Araújo
 
 ## Orientadores
-* Nome completo do professor 1
-* Nome completo do professor 2
+* João Pedro Oliveira Batisteli
 
 ## Instruções de utilização
 Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação.
