@@ -3,6 +3,7 @@
 ## Ator: Aluno
 
 - Eu, como aluno(a), gostaria de **gerenciar meu plano de ensino** para garantir que ele esteja correto e alinhado com meus objetivos acadêmicos.
+- Eu, como aluno(a), gostaria de **visualizar de forma clara quais disciplinas ofertadas são obrigatórias e quais são optativas** ao gerenciar meu plano de ensino, para facilitar a escolha e organização da minha grade.
 - Eu, como aluno(a), gostaria de **concluir minha solicitação de plano de ensino** assim que finalizar a montagem de uma grade que atenda às minhas necessidades.
 - Eu, como aluno(a), gostaria de **cancelar uma solicitação de plano de ensino já confirmada** caso deseje desistir ou realizar uma nova solicitação.
 - Eu, como aluno(a), gostaria de **receber uma notificação quando uma disciplina incluída em meu plano de ensino confirmado for cancelada** para poder reorganizar minha grade.
