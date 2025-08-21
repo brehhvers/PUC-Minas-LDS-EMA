@@ -5,6 +5,7 @@ Escreva um ou dois parágrafo resumindo o objetivo do seu projeto.
 * Brenda Evers
 * Pedro Augusto Ferreira de Paula
 * Pedro Henrique Barbosa Montandon de Araújo
+* Pedro Luiz Nato Silva
 
 ## Orientadores
 * João Pedro Oliveira Batisteli
