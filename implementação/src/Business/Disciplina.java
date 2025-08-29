@@ -3,6 +3,8 @@ package Business;
 import java.util.ArrayList;
 
 import Business.Pessoa.Aluno;
+import Enum.StatusDisciplina;
+import Enum.TipoDisciplina;
 import Interface.IEfetivavel;
 
 public class Disciplina implements IEfetivavel {

@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import Business.Pessoa.Aluno;
+import Enum.StatusDisciplina;
+import Enum.StatusPlano;
+import Enum.TipoDisciplina;
 import Interface.IEfetivavel;
 import Interface.IGerenciavel;
 
