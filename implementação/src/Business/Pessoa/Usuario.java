@@ -3,8 +3,10 @@ package Business.Pessoa;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import Utils.CodPessoa;
+
 public abstract class Usuario {
-    private int codPessoa; // TODO:
+    private int codPessoa;
     private String nome;
     private String email;
     private String senha;
@@ -13,6 +15,7 @@ public abstract class Usuario {
     protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public Usuario(String nome, String email, String senha) {
+        this.codPessoa = CodPessoa.gerar();
         this.nome = nome;
         this.email = email;
         this.senha = senha;

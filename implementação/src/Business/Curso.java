@@ -2,6 +2,8 @@ package Business;
 
 import java.time.LocalDate;
 
+import Utils.Id;
+
 public class Curso {
     private int id;
     private String nome;
@@ -10,6 +12,7 @@ public class Curso {
     private LocalDate dataCriacao;
     
     public Curso(String nome, int numCreditos) {
+        this.id = Id.gerar();
         this.nome = nome;
         this.numCreditos = numCreditos;
         this.dataCriacao = LocalDate.now();

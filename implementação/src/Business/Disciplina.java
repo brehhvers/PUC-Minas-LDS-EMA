@@ -8,6 +8,7 @@ import Business.Pessoa.Professor;
 import Enum.StatusDisciplina;
 import Enum.TipoDisciplina;
 import Interface.IEfetivavel;
+import Utils.Id;
 
 public class Disciplina implements IEfetivavel {
     private static final int QTDE_MIN_ALUNOS = 3;
@@ -23,6 +24,7 @@ public class Disciplina implements IEfetivavel {
     private ArrayList<Aluno> alunos;
 
     public Disciplina(TipoDisciplina tipo) {
+        this.id = Id.gerar();
         this.tipo = tipo;
         this.alunos = new ArrayList<>();
         this.dataCriacao = LocalDate.now();

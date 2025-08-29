@@ -10,6 +10,7 @@ import Enum.StatusPlano;
 import Enum.TipoDisciplina;
 import Interface.IEfetivavel;
 import Interface.IGerenciavel;
+import Utils.Id;
 
 public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Integer> {
     private int id;
@@ -21,6 +22,7 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
     private ArrayList<Disciplina> disciplinas;
 
     public PlanoDeEnsino(Aluno aluno) {
+        this.id = Id.gerar();
         this.aluno = aluno;
         this.status = StatusPlano.RASCUNHO;
         this.dataCriacao = LocalDate.now();

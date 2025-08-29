@@ -4,14 +4,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Interface.IGerenciavel;
+import Utils.Id;
 
 public class Curriculo implements IGerenciavel<String, String> {
-    private int id; // TODO
+    private int id;
     private Curso curso;
     private LocalDate dataCriacao;
     private ArrayList<String> disciplinas;
 
     public Curriculo(Curso curso) {
+        this.id = Id.gerar();
         this.curso = curso;
         this.dataCriacao = LocalDate.now();
         this.disciplinas = new ArrayList<>();

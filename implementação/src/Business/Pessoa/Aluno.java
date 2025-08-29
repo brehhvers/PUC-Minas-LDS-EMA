@@ -5,14 +5,16 @@ import java.util.ArrayList;
 import Business.Curriculo;
 import Business.PlanoDeEnsino;
 import Enum.StatusPlano;
+import Utils.Matricula;
 
 public class Aluno extends Usuario {
-    private int matricula; // TODO:
+    private int matricula;
     private Curriculo curriculo;
     private ArrayList<PlanoDeEnsino> planosDeEnsino;
 
     public Aluno(String nome, String email, String senha) {
         super(nome, email, senha);
+        this.matricula = Matricula.gerar();
         this.planosDeEnsino = new ArrayList<>();
     }
 

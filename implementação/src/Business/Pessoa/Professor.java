@@ -3,13 +3,15 @@ package Business.Pessoa;
 import java.util.ArrayList;
 
 import Business.Disciplina;
+import Utils.Matricula;
 
 public class Professor extends Usuario {
-    private int matricula; // TODO:
+    private int matricula;
     private ArrayList<Disciplina> disciplinas;
 
     public Professor(String nome, String email, String senha) {
         super(nome, email, senha);
+        this.matricula = Matricula.gerar();
         this.disciplinas = new ArrayList<>();
     }
 
