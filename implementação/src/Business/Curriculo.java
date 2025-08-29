@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Interface.IGerenciavel;
-import Utils.Id;
+import Utils.Codigo.Id;
 
 public class Curriculo implements IGerenciavel<String, String> {
     private int id;

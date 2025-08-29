@@ -3,7 +3,7 @@ package Business.Pessoa;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import Utils.CodPessoa;
+import Utils.Codigo.CodPessoa;
 
 public abstract class Usuario {
     private int codPessoa;

@@ -10,7 +10,7 @@ import Enum.StatusPlano;
 import Enum.TipoDisciplina;
 import Interface.IEfetivavel;
 import Interface.IGerenciavel;
-import Utils.Id;
+import Utils.Codigo.Id;
 
 public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Integer> {
     private int id;

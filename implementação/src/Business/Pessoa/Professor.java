@@ -3,7 +3,7 @@ package Business.Pessoa;
 import java.util.ArrayList;
 
 import Business.Disciplina;
-import Utils.Matricula;
+import Utils.Codigo.Matricula;
 
 public class Professor extends Usuario {
     private int matricula;

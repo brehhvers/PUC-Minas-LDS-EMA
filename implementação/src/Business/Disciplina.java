@@ -8,7 +8,7 @@ import Business.Pessoa.Professor;
 import Enum.StatusDisciplina;
 import Enum.TipoDisciplina;
 import Interface.IEfetivavel;
-import Utils.Id;
+import Utils.Codigo.Id;
 
 public class Disciplina implements IEfetivavel {
     private static final int QTDE_MIN_ALUNOS = 3;

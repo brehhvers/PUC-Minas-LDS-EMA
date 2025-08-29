@@ -1,4 +1,4 @@
-package Utils;
+package Utils.Codigo;
 
 public class CodPessoa extends Codigo {
     public static int gerar() {

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import Business.Curriculo;
 import Business.PlanoDeEnsino;
 import Enum.StatusPlano;
-import Utils.Matricula;
+import Utils.Codigo.Matricula;
 
 public class Aluno extends Usuario {
     private int matricula;
