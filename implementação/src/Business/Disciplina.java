@@ -3,16 +3,17 @@ package Business;
 import java.util.ArrayList;
 
 import Business.Pessoa.Aluno;
+import Interface.IEfetivavel;
 
-public class Disciplina implements Efetivavel {
+public class Disciplina implements IEfetivavel {
     private static final int QTDE_MAX_ALUNOS = 60;
 
     private int id;
     private String nome; 
     private double valor;
     private ArrayList<Aluno> alunos; 
-    private TipoDisciplina tipoDisciplina;
-    private StatusDisciplina statusDisciplina;
+    private TipoDisciplina tipo;
+    private StatusDisciplina status;
 
     public Disciplina() {
         this.alunos = new ArrayList<>();
@@ -38,20 +39,20 @@ public class Disciplina implements Efetivavel {
         this.valor = valor;
     }
 
-    public TipoDisciplina getTipoDisciplina() {
-        return tipoDisciplina;
+    public TipoDisciplina getTipo() {
+        return tipo;
     }
     
-    public void setTipoDisciplina(TipoDisciplina tipoDisciplina) {
-        this.tipoDisciplina = tipoDisciplina;
+    public void setTipo(TipoDisciplina tipo) {
+        this.tipo = tipo;
     }
 
-    public StatusDisciplina getStatusDisciplina() {
-        return statusDisciplina;
+    public StatusDisciplina getStatus() {
+        return status;
     }
 
-    public void setStatusDisciplina(StatusDisciplina statusDisciplina) {
-        this.statusDisciplina = statusDisciplina;
+    public void setStatus(StatusDisciplina status) {
+        this.status= status;
     }
 
     public boolean possuiVagas() {

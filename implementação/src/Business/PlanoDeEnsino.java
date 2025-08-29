@@ -2,29 +2,34 @@ package Business;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import Business.Pessoa.Aluno;
+import Interface.IEfetivavel;
+import Interface.IGerenciavel;
 
-public class PlanoDeEnsino implements Efetivavel {
+public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Integer> {
     private int id;
     private int ano;
+    private Aluno aluno;
     private int semestre;
     private LocalDate dataCriacao;
     private StatusPlano statusPlano;
-    private Aluno aluno;
     private ArrayList<Disciplina> disciplinas;
 
     public PlanoDeEnsino(Aluno aluno) {
         this.aluno = aluno;
+        this.dataCriacao = LocalDate.now();
         this.disciplinas = new ArrayList<>();
+        this.statusPlano = StatusPlano.RASCUNHO;
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public int getAno() {
-        return ano;
+        return this.ano;
     }
 
     public void setAno(int ano) {
@@ -32,7 +37,7 @@ public class PlanoDeEnsino implements Efetivavel {
     }
 
     public int getSemestre() {
-        return semestre;
+        return this.semestre;
     }
 
     public void setSemestre(int semestre) {
@@ -43,7 +48,6 @@ public class PlanoDeEnsino implements Efetivavel {
         return dataCriacao;
     }
 
-
     public StatusPlano getStatusPlano() {
         return statusPlano;
     }
@@ -53,40 +57,63 @@ public class PlanoDeEnsino implements Efetivavel {
     }
 
     public Aluno getAluno() {
-        return aluno;
-    }
-
-    public ArrayList<Disciplina> getDisciplinas() {
-        return disciplinas;
-    }
-
-    public void setDisciplinas(ArrayList<Disciplina> disciplinas) {
-        this.disciplinas = disciplinas;
-    }
-
-    public boolean addDisciplina(Disciplina disciplina) {
-        // implementar regra de negocio
-        return this.disciplinas.add(disciplina);
-    }
-
-    public Disciplina removerAluno(int idDisciplina) {
-        Disciplina disciplina = this.disciplinas.stream().filter(d -> d.getId() == idDisciplina).findFirst().orElse(null);
-
-        if (disciplina != null) {
-            this.disciplinas.remove(idDisciplina);
-        } else {
-            throw new IllegalArgumentException("Disciplina não localizada no plano de ensino");
-        }
-
-        return disciplina;
+        return this.aluno;
     }
 
     public double getValorTotal() {
         return this.disciplinas.stream().mapToDouble(d -> d.getValor()).sum();
     }
 
+    public ArrayList<Disciplina> getDisciplinas() {
+        return this.disciplinas;
+    }
+
+    @Override
+    public boolean addDisciplina(Disciplina disciplina) {
+        final long MAX_DISCIPLINAS = 6L;
+        final long MAX_OBRIGATORIAS = 4L;
+        final long MAX_OPTATIVAS = 2L;
+
+        if (this.disciplinas.size() == MAX_DISCIPLINAS) {
+            throw new RuntimeException("Limite máximo de disciplinas atingido neste plano.");
+        }
+
+        long qtdeObrigatorias = this.disciplinas.stream()
+                .filter(d -> TipoDisciplina.OBRIGATORIA.equals(d.getTipo()))
+                .count();
+
+        if (qtdeObrigatorias == MAX_OBRIGATORIAS
+                && TipoDisciplina.OBRIGATORIA.equals(disciplina.getTipo()))
+            throw new RuntimeException("Limite máximo de disciplinas obrigatórias atingido neste plano.");
+
+        long qtdeOptativas = this.disciplinas.stream()
+                .filter(d -> TipoDisciplina.OPTATIVA.equals(d.getTipo()))
+                .count();
+
+        if (qtdeOptativas == MAX_OPTATIVAS
+                && TipoDisciplina.OPTATIVA.equals(disciplina.getTipo()))
+            throw new RuntimeException("Limite máximo de disciplinas optativas atingido neste plano.");
+
+        return this.disciplinas.add(disciplina);
+    }
+
+    @Override
+    public Disciplina removerDisciplina(Integer idDisciplina) {
+        Disciplina disciplina = this.disciplinas.stream()
+                .filter(d -> d.getId() == idDisciplina)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Nenhuma disciplina correspondente foi encontrada neste plano de ensino."));
+
+        this.disciplinas.remove(disciplina);
+        return disciplina;
+    }
+
     @Override
     public void efetivar() {
-        // TODO Auto-generated method stub
+        this.disciplinas = this.disciplinas.stream()
+                .filter(d -> StatusDisciplina.ATIVA.equals(d.getStatus()))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        this.statusPlano = StatusPlano.EFETIVADO;
     }
 }

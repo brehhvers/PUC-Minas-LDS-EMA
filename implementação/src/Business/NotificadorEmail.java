@@ -1,6 +1,8 @@
 package Business;
 
-public class NotificadorEmail implements Notificavel {
+import Interface.INotificavel;
+
+public class NotificadorEmail implements INotificavel {
     @Override
     public void notificar() {
         // TODO Auto-generated method stub

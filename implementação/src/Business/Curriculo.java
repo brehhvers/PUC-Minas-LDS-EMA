@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import Interface.IGerenciavel;
 
 public class Curriculo implements IGerenciavel<String, String> {
-
     private int id; // TODO
     private Curso curso;
     private LocalDate dataCriacao;
