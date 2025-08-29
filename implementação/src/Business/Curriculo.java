@@ -11,7 +11,8 @@ public class Curriculo implements IGerenciavel<String, String> {
     private LocalDate dataCriacao;
     private ArrayList<String> disciplinas;
 
-    public Curriculo() {
+    public Curriculo(Curso curso) {
+        this.curso = curso;
         this.dataCriacao = LocalDate.now();
         this.disciplinas = new ArrayList<>();
     }
@@ -22,10 +23,6 @@ public class Curriculo implements IGerenciavel<String, String> {
 
     public Curso getCurso() {
         return this.curso;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
     }
 
     public LocalDate dataCriacao() {

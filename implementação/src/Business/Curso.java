@@ -1,33 +1,41 @@
 package Business;
 
-public class Curso {
+import java.time.LocalDate;
 
-    private int id; // TODO:
+public class Curso {
+    private int id;
     private String nome;
-    private String numCreditos;
+    private int numCreditos;
+    private String departamento;
+    private LocalDate dataCriacao;
     
-    public  Curso(String nome, String numCreditos) {
+    public Curso(String nome, int numCreditos) {
         this.nome = nome;
         this.numCreditos = numCreditos;
+        this.dataCriacao = LocalDate.now();
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public int getNumCreditos() {
+        return this.numCreditos;
     }
 
-    public String getNumCreditos() {
-        return numCreditos;
+    public String getDepartamento() {
+        return this.departamento;
     }
 
-    public void setNumCreditos(String numCreditos) {
-        this.numCreditos = numCreditos;
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public LocalDate getDataCriacao() {
+        return this.dataCriacao;
     }
 }
