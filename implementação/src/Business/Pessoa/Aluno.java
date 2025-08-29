@@ -2,11 +2,13 @@ package Business.Pessoa;
 
 import java.util.ArrayList;
 
+import Business.Curriculo;
 import Business.PlanoDeEnsino;
 import Enum.StatusPlano;
 
 public class Aluno extends Usuario {
     private int matricula; // TODO:
+    private Curriculo curriculo;
     private ArrayList<PlanoDeEnsino> planosDeEnsino;
 
     public Aluno(String nome, String email, String senha) {
@@ -15,7 +17,15 @@ public class Aluno extends Usuario {
     }
 
     public int getMatricula() {
-        return matricula;
+        return this.matricula;
+    }
+
+    public Curriculo getCurriculo() {
+        return this.curriculo;
+    }
+
+    public void setCurriculo(Curriculo curriculo) {
+        this.curriculo = curriculo;
     }
 
     public PlanoDeEnsino getPlanoAtivo() {

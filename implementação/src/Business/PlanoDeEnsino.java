@@ -72,10 +72,17 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
     }
 
     @Override
-    public synchronized  boolean addDisciplina(Disciplina disciplina) {
+    public synchronized boolean addDisciplina(Disciplina disciplina) {
         final long MAX_DISCIPLINAS = 6L;
         final long MAX_OBRIGATORIAS = 4L;
         final long MAX_OPTATIVAS = 2L;
+
+        Curriculo curriculo = this.aluno.getCurriculo();
+
+        if (!curriculo.getDisciplinas().contains(disciplina.getNome())) {
+            throw new IllegalArgumentException(
+                    "Não é possível adicionar esta disciplina: ela não faz parte do currículo do aluno.");
+        }
 
         if (this.disciplinas.size() == MAX_DISCIPLINAS) {
             throw new RuntimeException("Limite máximo de disciplinas atingido neste plano.");
@@ -101,11 +108,12 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
     }
 
     @Override
-    public synchronized  Disciplina removerDisciplina(Integer idDisciplina) {
+    public synchronized Disciplina removerDisciplina(Integer idDisciplina) {
         Disciplina disciplina = this.disciplinas.stream()
                 .filter(d -> d.getId() == idDisciplina)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Nenhuma disciplina correspondente foi encontrada neste plano de ensino."));
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Nenhuma disciplina correspondente foi encontrada neste plano de ensino."));
 
         this.disciplinas.remove(disciplina);
         return disciplina;
