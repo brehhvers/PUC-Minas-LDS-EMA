@@ -72,7 +72,7 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
     }
 
     @Override
-    public boolean addDisciplina(Disciplina disciplina) {
+    public synchronized  boolean addDisciplina(Disciplina disciplina) {
         final long MAX_DISCIPLINAS = 6L;
         final long MAX_OBRIGATORIAS = 4L;
         final long MAX_OPTATIVAS = 2L;
@@ -101,7 +101,7 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
     }
 
     @Override
-    public Disciplina removerDisciplina(Integer idDisciplina) {
+    public synchronized  Disciplina removerDisciplina(Integer idDisciplina) {
         Disciplina disciplina = this.disciplinas.stream()
                 .filter(d -> d.getId() == idDisciplina)
                 .findFirst()

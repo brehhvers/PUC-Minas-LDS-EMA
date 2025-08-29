@@ -37,12 +37,12 @@ public class Curriculo implements IGerenciavel<String, String> {
     }
 
     @Override
-    public boolean addDisciplina(String nomeDisciplina) {
+    public synchronized boolean addDisciplina(String nomeDisciplina) {
         return this.disciplinas.add(nomeDisciplina);
     }
 
     @Override
-    public String removerDisciplina(String nomeDisciplina) {
+    public synchronized  String removerDisciplina(String nomeDisciplina) {
         if (this.disciplinas.remove(nomeDisciplina)) {
             return nomeDisciplina;
         } else {

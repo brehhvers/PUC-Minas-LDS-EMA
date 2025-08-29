@@ -1,5 +1,6 @@
 package Business;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Business.Pessoa.Aluno;
@@ -8,25 +9,30 @@ import Enum.TipoDisciplina;
 import Interface.IEfetivavel;
 
 public class Disciplina implements IEfetivavel {
+    private static final int QTDE_MIN_ALUNOS = 3;
     private static final int QTDE_MAX_ALUNOS = 60;
 
     private int id;
-    private String nome; 
+    private String nome;
     private double valor;
-    private ArrayList<Aluno> alunos; 
     private TipoDisciplina tipo;
+    private LocalDate dataCriacao;
     private StatusDisciplina status;
+    private ArrayList<Aluno> alunos;
 
-    public Disciplina() {
+    public Disciplina(TipoDisciplina tipo) {
+        this.tipo = tipo;
         this.alunos = new ArrayList<>();
+        this.dataCriacao = LocalDate.now();
+        this.status = StatusDisciplina.PREVISTA;
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
-    
+
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
     public void setNome(String nome) {
@@ -34,7 +40,7 @@ public class Disciplina implements IEfetivavel {
     }
 
     public double getValor() {
-        return valor;
+        return this.valor;
     }
 
     public void setValor(double valor) {
@@ -42,44 +48,53 @@ public class Disciplina implements IEfetivavel {
     }
 
     public TipoDisciplina getTipo() {
-        return tipo;
+        return this.tipo;
     }
-    
+
+    public LocalDate getDataCriacao() {
+        return this.dataCriacao;
+    }
+
     public void setTipo(TipoDisciplina tipo) {
         this.tipo = tipo;
     }
 
     public StatusDisciplina getStatus() {
-        return status;
+        return this.status;
     }
 
     public void setStatus(StatusDisciplina status) {
-        this.status= status;
+        this.status = status;
     }
 
-    public boolean possuiVagas() {
-        return true;
+    private boolean possuiVagas() {
+        return this.alunos.size() < QTDE_MAX_ALUNOS;
+    }
+
+    public ArrayList<Aluno> getAlunos() {
+        return this.alunos;
     }
 
     public boolean addAluno(Aluno aluno) {
-        // implementar regra de negocio 
-       return this.alunos.add(aluno);
+        if (possuiVagas()) {
+            return this.alunos.add(aluno);
+        } else {
+            throw new RuntimeException("Não é possível adicionar o aluno: a disciplina já atingiu o número máximo de vagas.");
+        }
     }
 
     public Aluno removerAluno(int matricula) {
-        Aluno aluno = this.alunos.stream().filter(a -> a.getMatricula() == matricula).findFirst().orElse(null);
+        Aluno aluno = this.alunos.stream().filter(a -> a.getMatricula() == matricula).findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Não foi possível remover o aluno: matrícula inválida ou inexistente."));
 
-        if (aluno != null) {
-            this.alunos.remove(aluno);
-        } else {
-            throw new IllegalArgumentException("Aluno não identificado a partir da matricula informada");
-        }
-
+        this.alunos.remove(aluno);
         return aluno;
     }
 
     @Override
     public void efetivar() {
-        // TODO Auto-generated method stub
+        if (this.alunos.size() < QTDE_MIN_ALUNOS) {
+            this.status = StatusDisciplina.CANCELADA;
+        }
     }
 }
