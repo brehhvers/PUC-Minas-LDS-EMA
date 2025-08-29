@@ -6,6 +6,7 @@ import Business.Curriculo;
 import Business.PlanoDeEnsino;
 import Enum.StatusPlano;
 import Utils.Codigo.Matricula;
+import Utils.Notificador.NotificadorCobranca;
 
 public class Aluno extends Usuario {
     private int matricula;
@@ -56,6 +57,9 @@ public class Aluno extends Usuario {
         }
 
         planoDeEnsino.setStatus(StatusPlano.CONFIRMADO);
+        NotificadorCobranca.notificar("Plano de ensino " + planoDeEnsino.getId() + " confirmado",
+                planoDeEnsino.getValorTotal());
+
         return true;
     }
 
@@ -67,6 +71,9 @@ public class Aluno extends Usuario {
         }
 
         planoDeEnsino.setStatus(StatusPlano.CANCELADO);
+        NotificadorCobranca.notificar("Plano de ensino " + planoDeEnsino.getId() + " cancelado",
+                planoDeEnsino.getValorTotal());
+
         this.planosDeEnsino.remove(planoDeEnsino);
         return planoDeEnsino;
     }

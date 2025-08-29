@@ -9,6 +9,7 @@ import Enum.StatusDisciplina;
 import Enum.TipoDisciplina;
 import Interface.IEfetivavel;
 import Utils.Codigo.Id;
+import Utils.Notificador.NotificadorEmail;
 
 public class Disciplina implements IEfetivavel {
     private static final int QTDE_MIN_ALUNOS = 3;
@@ -108,7 +109,12 @@ public class Disciplina implements IEfetivavel {
     @Override
     public void efetivar() {
         if (this.alunos.size() < QTDE_MIN_ALUNOS) {
+
             this.status = StatusDisciplina.CANCELADA;
+            this.alunos.forEach(a -> NotificadorEmail.notificar(
+                    "Prezado(a) " + a.getNome() + " a disciplina " + this.nome
+                            + " infelizmente foi cancelada cancelada devido à quantidade insuficiente de alunos.",
+                    a.getEmail()));
         }
     }
 }

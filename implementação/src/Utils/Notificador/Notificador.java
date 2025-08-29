@@ -1,3 +1,3 @@
 package Utils.Notificador;
 
-public abstract class Notificador<T, I> {}
+public abstract class Notificador<T, V> {}
