@@ -55,6 +55,7 @@ public class Aluno extends Usuario {
         }
 
         planoDeEnsino.setStatus(StatusPlano.CANCELADO);
+        this.planosDeEnsino.remove(planoDeEnsino);
         return planoDeEnsino;
     }
 
