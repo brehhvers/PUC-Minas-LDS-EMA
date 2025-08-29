@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Business.Pessoa.Aluno;
+import Business.Pessoa.Professor;
 import Enum.StatusDisciplina;
 import Enum.TipoDisciplina;
 import Interface.IEfetivavel;
@@ -15,6 +16,7 @@ public class Disciplina implements IEfetivavel {
     private int id;
     private String nome;
     private double valor;
+    private Professor professor;
     private TipoDisciplina tipo;
     private LocalDate dataCriacao;
     private StatusDisciplina status;
@@ -71,6 +73,14 @@ public class Disciplina implements IEfetivavel {
         return this.alunos.size() < QTDE_MAX_ALUNOS;
     }
 
+    public Professor getProfessor() {
+        return this.professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
     public ArrayList<Aluno> getAlunos() {
         return this.alunos;
     }
@@ -79,13 +89,15 @@ public class Disciplina implements IEfetivavel {
         if (possuiVagas()) {
             return this.alunos.add(aluno);
         } else {
-            throw new RuntimeException("Não é possível adicionar o aluno: a disciplina já atingiu o número máximo de vagas.");
+            throw new RuntimeException(
+                    "Não é possível adicionar o aluno: a disciplina já atingiu o número máximo de vagas.");
         }
     }
 
     public Aluno removerAluno(int matricula) {
         Aluno aluno = this.alunos.stream().filter(a -> a.getMatricula() == matricula).findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Não foi possível remover o aluno: matrícula inválida ou inexistente."));
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Não foi possível remover o aluno: matrícula inválida ou inexistente."));
 
         this.alunos.remove(aluno);
         return aluno;
