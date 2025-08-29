@@ -13,15 +13,16 @@ public class Curriculo implements IGerenciavel<String, String> {
     private ArrayList<String> disciplinas;
 
     public Curriculo() {
-        disciplinas = new ArrayList<>();
+        this.dataCriacao = LocalDate.now();
+        this.disciplinas = new ArrayList<>();
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public Curso getCurso() {
-        return curso;
+        return this.curso;
     }
 
     public void setCurso(Curso curso) {
@@ -29,11 +30,11 @@ public class Curriculo implements IGerenciavel<String, String> {
     }
 
     public LocalDate dataCriacao() {
-        return dataCriacao;
+        return this.dataCriacao;
     }
 
     public ArrayList<String> getDisciplinas() {
-        return disciplinas;
+        return this.disciplinas;
     }
 
     @Override
