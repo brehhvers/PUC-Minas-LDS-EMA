@@ -1,31 +1,31 @@
 package Business.Pessoa;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public abstract class Usuario {
-
     private int codPessoa; // TODO:
     private String nome;
-    private LocalDate dataCadastro;
-    private boolean isAtivo;
     private String email;
     private String senha;
+    private boolean isAtivo;
+    private LocalDate dataCadastro;
+    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public Usuario(
-            String nome,
-            LocalDate dataCadastro,
-            String email,
-            String senha
-    ) {
+    public Usuario(String nome, String email, String senha) {
         this.nome = nome;
-        this.dataCadastro = dataCadastro;
-        this.isAtivo = true;
         this.email = email;
         this.senha = senha;
+        this.isAtivo = true;
+        this.dataCadastro = LocalDate.now();
+    }
+
+    public int getCodPessoa() {
+        return this.codPessoa;
     }
 
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
     public void setNome(String nome) {
@@ -33,7 +33,7 @@ public abstract class Usuario {
     }
 
     public LocalDate getDataCadastro() {
-        return dataCadastro;
+        return this.dataCadastro;
     }
 
     public void setDataCadastro(LocalDate dataCadastro) {
@@ -41,7 +41,7 @@ public abstract class Usuario {
     }
 
     public boolean isAtivo() {
-        return isAtivo;
+        return this.isAtivo;
     }
 
     public void setAtivo(boolean isAtivo) {
@@ -49,7 +49,7 @@ public abstract class Usuario {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -57,10 +57,12 @@ public abstract class Usuario {
     }
 
     public String getSenha() {
-        return senha;
+        return this.senha;
     }
 
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public abstract String toString();
 }

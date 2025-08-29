@@ -16,15 +16,15 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
     private int ano;
     private Aluno aluno;
     private int semestre;
+    private StatusPlano status;
     private LocalDate dataCriacao;
-    private StatusPlano statusPlano;
     private ArrayList<Disciplina> disciplinas;
 
     public PlanoDeEnsino(Aluno aluno) {
         this.aluno = aluno;
+        this.status = StatusPlano.RASCUNHO;
         this.dataCriacao = LocalDate.now();
         this.disciplinas = new ArrayList<>();
-        this.statusPlano = StatusPlano.RASCUNHO;
     }
 
     public int getId() {
@@ -48,15 +48,15 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
     }
 
     public LocalDate getDataCriacao() {
-        return dataCriacao;
+        return this.dataCriacao;
     }
 
-    public StatusPlano getStatusPlano() {
-        return statusPlano;
+    public StatusPlano getStatus() {
+        return this.status;
     }
 
-    public void setStatusPlano(StatusPlano statusPlano) {
-        this.statusPlano = statusPlano;
+    public void setStatus(StatusPlano status) {
+        this.status = status;
     }
 
     public Aluno getAluno() {
@@ -117,6 +117,6 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
                 .filter(d -> StatusDisciplina.ATIVA.equals(d.getStatus()))
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        this.statusPlano = StatusPlano.EFETIVADO;
+        this.status = StatusPlano.EFETIVADO;
     }
 }
