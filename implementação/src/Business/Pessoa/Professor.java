@@ -3,9 +3,10 @@ package Business.Pessoa;
 import java.util.ArrayList;
 
 import Business.Disciplina;
-import Utils.Codigo.Matricula;
+import Interface.IGerenciavel;
+import Utils.Identificador.Matricula;
 
-public class Professor extends Usuario {
+public class Professor extends Usuario implements IGerenciavel<Disciplina, Integer> {
     private int matricula;
     private ArrayList<Disciplina> disciplinas;
 
@@ -37,9 +38,27 @@ public class Professor extends Usuario {
         Disciplina disciplinaRecuperada = this.disciplinas.stream()
                 .filter(d -> d.getId() == idDisciplina)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Nenhuma disciplina corresponde ao código fornecido."));
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Nenhuma disciplina corresponde ao código fornecido."));
 
         return disciplinaRecuperada.getAlunos();
+    }
+
+    @Override
+    public boolean addDisciplina(Disciplina disciplina) {
+        return this.disciplinas.add(disciplina);
+    }
+
+    @Override
+    public Disciplina removerDisciplina(Integer idDisciplina) {
+        Disciplina disciplina = this.disciplinas.stream()
+                .filter(d -> d.getId() == idDisciplina)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Este professor não está ministrando a disciplina informada."));
+
+        this.disciplinas.remove(disciplina);
+        return disciplina;
     }
 
     @Override

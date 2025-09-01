@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import Business.Curriculo;
 import Business.PlanoDeEnsino;
 import Enum.StatusPlano;
-import Utils.Codigo.Matricula;
+import Utils.Identificador.Matricula;
 import Utils.Notificador.NotificadorCobranca;
 
 public class Aluno extends Usuario {
@@ -33,7 +33,7 @@ public class Aluno extends Usuario {
 
     public PlanoDeEnsino getPlanoAtivo() {
         if (this.planosDeEnsino.isEmpty())
-            throw new RuntimeException("Não há nenhum plano de ensino criado até o momento.");
+            throw new IllegalStateException("Não há nenhum plano de ensino criado até o momento.");
 
         return this.planosDeEnsino.get(this.planosDeEnsino.size() - 1);
     }
@@ -49,16 +49,15 @@ public class Aluno extends Usuario {
         PlanoDeEnsino planoDeEnsino = this.getPlanoAtivo();
 
         if (StatusPlano.CONFIRMADO.equals(planoDeEnsino.getStatus())) {
-            throw new RuntimeException("O plano de ensino atual já está confirmado.");
+            throw new IllegalStateException("O plano de ensino atual já está confirmado.");
         }
 
         if (!StatusPlano.RASCUNHO.equals(planoDeEnsino.getStatus())) {
-            throw new RuntimeException("Antes de confirmar, crie um novo plano de ensino.");
+            throw new IllegalStateException("Antes de confirmar, crie um novo plano de ensino.");
         }
 
         planoDeEnsino.setStatus(StatusPlano.CONFIRMADO);
-        NotificadorCobranca.notificar("Plano de ensino " + planoDeEnsino.getId() + " confirmado",
-                planoDeEnsino.getValorTotal());
+        planoDeEnsino.getDisciplinas().stream().forEach(d -> d.addAluno(this));
 
         return true;
     }
@@ -67,12 +66,16 @@ public class Aluno extends Usuario {
         PlanoDeEnsino planoDeEnsino = this.getPlanoAtivo();
 
         if (StatusPlano.EFETIVADO.equals(planoDeEnsino.getStatus())) {
-            throw new RuntimeException("Não é possível cancelar um plano de ensino que já foi efetivado.");
+            throw new IllegalStateException("Não é possível cancelar um plano de ensino que já foi efetivado.");
         }
 
         planoDeEnsino.setStatus(StatusPlano.CANCELADO);
-        NotificadorCobranca.notificar("Plano de ensino " + planoDeEnsino.getId() + " cancelado",
-                planoDeEnsino.getValorTotal());
+        planoDeEnsino.getDisciplinas().stream().forEach(d -> d.removerAluno(this.matricula));
+
+        NotificadorCobranca
+                .getNotificador()
+                .notificar("Plano de ensino " + planoDeEnsino.getId() + " cancelado",
+                        planoDeEnsino.getValorTotal());
 
         this.planosDeEnsino.remove(planoDeEnsino);
         return planoDeEnsino;

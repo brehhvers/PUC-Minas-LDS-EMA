@@ -10,7 +10,8 @@ import Enum.StatusPlano;
 import Enum.TipoDisciplina;
 import Interface.IEfetivavel;
 import Interface.IGerenciavel;
-import Utils.Codigo.Id;
+import Utils.Identificador.Id;
+import Utils.Notificador.NotificadorCobranca;
 
 public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Integer> {
     private int id;
@@ -87,7 +88,7 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
         }
 
         if (this.disciplinas.size() == MAX_DISCIPLINAS) {
-            throw new RuntimeException("Limite máximo de disciplinas atingido neste plano.");
+            throw new IllegalStateException("Limite máximo de disciplinas atingido neste plano.");
         }
 
         long qtdeObrigatorias = this.disciplinas.stream()
@@ -96,7 +97,7 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
 
         if (qtdeObrigatorias == MAX_OBRIGATORIAS
                 && TipoDisciplina.OBRIGATORIA.equals(disciplina.getTipo()))
-            throw new RuntimeException("Limite máximo de disciplinas obrigatórias atingido neste plano.");
+            throw new IllegalStateException("Limite máximo de disciplinas obrigatórias atingido neste plano.");
 
         long qtdeOptativas = this.disciplinas.stream()
                 .filter(d -> TipoDisciplina.OPTATIVA.equals(d.getTipo()))
@@ -104,7 +105,7 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
 
         if (qtdeOptativas == MAX_OPTATIVAS
                 && TipoDisciplina.OPTATIVA.equals(disciplina.getTipo()))
-            throw new RuntimeException("Limite máximo de disciplinas optativas atingido neste plano.");
+            throw new IllegalStateException("Limite máximo de disciplinas optativas atingido neste plano.");
 
         return this.disciplinas.add(disciplina);
     }
@@ -127,6 +128,13 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
                 .filter(d -> StatusDisciplina.ATIVA.equals(d.getStatus()))
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        this.status = StatusPlano.EFETIVADO;
+        if (StatusPlano.CONFIRMADO.equals(this.status)) {
+            this.status = StatusPlano.EFETIVADO;
+
+            NotificadorCobranca
+                    .getNotificador()
+                    .notificar("Plano de ensino " + this.getId() + " efetivado",
+                            this.getValorTotal());
+        }
     }
 }

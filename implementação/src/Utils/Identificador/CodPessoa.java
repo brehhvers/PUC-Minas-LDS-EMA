@@ -1,6 +1,6 @@
-package Utils.Codigo;
+package Utils.Identificador;
 
-public class CodPessoa extends Codigo {
+public class CodPessoa extends Id {
     public static int gerar() {
         return 100000 + RANDOM.nextInt(900000);
     }

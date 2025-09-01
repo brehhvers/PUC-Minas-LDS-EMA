@@ -2,7 +2,7 @@ package Business;
 
 import java.time.LocalDate;
 
-import Utils.Codigo.Id;
+import Utils.Identificador.Id;
 
 public class Curso {
     private int id;

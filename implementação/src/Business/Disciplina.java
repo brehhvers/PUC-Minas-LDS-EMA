@@ -8,7 +8,7 @@ import Business.Pessoa.Professor;
 import Enum.StatusDisciplina;
 import Enum.TipoDisciplina;
 import Interface.IEfetivavel;
-import Utils.Codigo.Id;
+import Utils.Identificador.Id;
 import Utils.Notificador.NotificadorEmail;
 
 public class Disciplina implements IEfetivavel {
@@ -92,8 +92,9 @@ public class Disciplina implements IEfetivavel {
         if (possuiVagas()) {
             return this.alunos.add(aluno);
         } else {
-            throw new RuntimeException(
-                    "Não é possível adicionar o aluno: a disciplina já atingiu o número máximo de vagas.");
+            throw new IllegalStateException(
+                    "Não é possível adicionar o aluno: disciplina " + this.id + " " + this.nome
+                            + " já atingiu o número máximo de vagas.");
         }
     }
 
@@ -109,12 +110,15 @@ public class Disciplina implements IEfetivavel {
     @Override
     public void efetivar() {
         if (this.alunos.size() < QTDE_MIN_ALUNOS) {
-
             this.status = StatusDisciplina.CANCELADA;
-            this.alunos.forEach(a -> NotificadorEmail.notificar(
+
+            NotificadorEmail notificador = NotificadorEmail.getNotificador();
+            this.alunos.forEach(a -> notificador.notificar(
                     "Prezado(a) " + a.getNome() + " a disciplina " + this.nome
                             + " infelizmente foi cancelada cancelada devido à quantidade insuficiente de alunos.",
                     a.getEmail()));
+        } else {
+            this.status = StatusDisciplina.ATIVA;
         }
     }
 }

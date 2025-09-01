@@ -6,6 +6,7 @@ import Business.Curriculo;
 import Business.Curso;
 import Business.Disciplina;
 import Enum.TipoDisciplina;
+import Interface.IEfetivavel;
 
 public class Secretaria extends Usuario {
     public Secretaria(String nome, String email, String senha) {
@@ -36,7 +37,7 @@ public class Secretaria extends Usuario {
         return new Secretaria(nome, email, senha);
     }
 
-    public void consolidarMatriculas(ArrayList<Disciplina> disciplinas, ArrayList<Aluno> alunos) {
+    public void consolidarMatriculas(ArrayList<IEfetivavel> disciplinas, ArrayList<Aluno> alunos) {
         disciplinas.stream().forEach(d -> d.efetivar());
         alunos.stream().forEach(a -> a.getPlanoAtivo().efetivar());
     }
