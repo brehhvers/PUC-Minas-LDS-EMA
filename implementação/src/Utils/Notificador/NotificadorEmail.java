@@ -1,6 +1,8 @@
 package Utils.Notificador;
 
-public class NotificadorEmail extends Notificador<String, String> {
+import Interface.INotificavel;
+
+public class NotificadorEmail implements INotificavel<String, String> {
     private static final NotificadorEmail INSTANCIA = new NotificadorEmail();
 
     private NotificadorEmail() {}

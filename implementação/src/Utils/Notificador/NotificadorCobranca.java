@@ -1,6 +1,8 @@
 package Utils.Notificador;
 
-public class NotificadorCobranca extends Notificador<String, Double> {
+import Interface.INotificavel;
+
+public class NotificadorCobranca implements INotificavel<String, Double> {
     private static final NotificadorCobranca INSTANCIA = new NotificadorCobranca();
 
     private NotificadorCobranca() {}
