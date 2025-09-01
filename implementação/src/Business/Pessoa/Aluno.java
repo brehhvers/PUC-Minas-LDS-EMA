@@ -77,7 +77,6 @@ public class Aluno extends Usuario {
                 .notificar("Plano de ensino " + planoDeEnsino.getId() + " cancelado",
                         planoDeEnsino.getValorTotal());
 
-        this.planosDeEnsino.remove(planoDeEnsino);
         return planoDeEnsino;
     }
 
