@@ -65,8 +65,9 @@ public class Aluno extends Usuario {
     public PlanoDeEnsino cancelarPlanoAtivo() {
         PlanoDeEnsino planoDeEnsino = this.getPlanoAtivo();
 
-        if (StatusPlano.EFETIVADO.equals(planoDeEnsino.getStatus())) {
-            throw new IllegalStateException("Não é possível cancelar um plano de ensino que já foi efetivado.");
+        if (!StatusPlano.CONFIRMADO.equals(planoDeEnsino.getStatus())) {
+            throw new IllegalStateException("O plano de ensino não pode ser cancelado devido ao seu status atual: "
+                    + planoDeEnsino.getStatus());
         }
 
         planoDeEnsino.setStatus(StatusPlano.CANCELADO);
