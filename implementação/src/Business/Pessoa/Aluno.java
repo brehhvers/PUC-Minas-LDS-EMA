@@ -58,7 +58,6 @@ public class Aluno extends Usuario {
 
         planoDeEnsino.setStatus(StatusPlano.CONFIRMADO);
         planoDeEnsino.getDisciplinas().stream().forEach(d -> d.addAluno(this));
-
         return true;
     }
 
