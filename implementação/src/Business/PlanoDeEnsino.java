@@ -128,13 +128,15 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
                 .filter(d -> StatusDisciplina.ATIVA.equals(d.getStatus()))
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        if (StatusPlano.CONFIRMADO.equals(this.status)) {
-            this.status = StatusPlano.EFETIVADO;
+        if (this.disciplinas.size() > 0) {
+            if (StatusPlano.CONFIRMADO.equals(this.status)) {
+                this.status = StatusPlano.EFETIVADO;
 
-            NotificadorCobranca
-                    .getNotificador()
-                    .notificar("Plano de ensino " + this.getId() + " efetivado",
-                            this.getValorTotal());
-        }
+                NotificadorCobranca
+                        .getNotificador()
+                        .notificar("Plano de ensino " + this.getId() + " efetivado",
+                                this.getValorTotal());
+            }
+        } 
     }
 }
