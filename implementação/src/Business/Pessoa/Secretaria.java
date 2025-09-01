@@ -39,7 +39,11 @@ public class Secretaria extends Usuario {
 
     public void consolidarMatriculas(ArrayList<IEfetivavel> disciplinas, ArrayList<Aluno> alunos) {
         disciplinas.stream().forEach(d -> d.efetivar());
-        alunos.stream().forEach(a -> a.getPlanoAtivo().efetivar());
+        
+        alunos.stream().forEach(a -> {
+            IEfetivavel planoDeEnsino = a.getPlanoAtivo();
+            planoDeEnsino.efetivar();
+        });
     }
 
     @Override
