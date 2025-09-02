@@ -1,8 +1,5 @@
 package Data.DAO;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import Business.Pessoa.Professor;
 import Data.Conversor.Parse;
 
@@ -26,15 +23,4 @@ public class ProfessorDAO extends DAO<Professor> {
     protected Professor parse(String linha) {
         return Parse.professor(linha);
     }
-
-    // public Professor carregarPorMatricula(int matricula) throws IOException {
-    //     ArrayList<Professor> professors = super.carregar();
-
-    //     Professor recuperado = professors.stream()
-    //             .filter(p -> p.getMatricula() == matricula)
-    //             .findFirst()
-    //             .orElse(null);
-
-    //     return recuperado;
-    // }
 }

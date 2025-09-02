@@ -1,8 +1,5 @@
 package Data.DAO;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import Business.Curso;
 import Data.Conversor.Parse;
 
@@ -26,15 +23,4 @@ public class CursoDAO extends DAO<Curso> {
     protected Curso parse(String linha) {
         return Parse.curso(linha);
     }
-
-    // public Curso carregarPorId(int id) throws IOException {
-    //     ArrayList<Curso> cursos = super.carregar();
-
-    //     Curso recuperado = cursos.stream()
-    //             .filter(c -> c.getId() == id)
-    //             .findFirst()
-    //             .orElse(null);
-
-    //     return recuperado;
-    // }
 }

@@ -1,8 +1,5 @@
 package Data.DAO;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import Business.Curriculo;
 import Data.Conversor.Parse;
 
@@ -26,15 +23,4 @@ public class CurriculoDAO extends DAO<Curriculo> {
     protected Curriculo parse(String linha) {
         return Parse.curriculo(linha);
     }
-
-    // public Curriculo carregarPorId(int id) throws IOException {
-    //     ArrayList<Curriculo> curriculos = super.carregar();
-
-    //     Curriculo recuperado = curriculos.stream()
-    //             .filter(c -> c.getId() == id)
-    //             .findFirst()
-    //             .orElse(null);
-
-    //     return recuperado;
-    // }
 }
