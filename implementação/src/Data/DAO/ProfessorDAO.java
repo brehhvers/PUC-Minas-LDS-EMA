@@ -1,7 +1,7 @@
-package Data;
+package Data.DAO;
 
 import Business.Pessoa.Professor;
-import Utils.Parse;
+import Utils.Conversor.Parse;
 
 public class ProfessorDAO extends DAO<Professor> {
     private static final String CAMINHO_ARQUIVO = "src/Data/File/professor.txt";

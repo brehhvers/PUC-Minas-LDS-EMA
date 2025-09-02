@@ -1,4 +1,4 @@
-package Utils;
+package Utils.Conversor;
 
 import Business.Curso;
 import Business.Curriculo;

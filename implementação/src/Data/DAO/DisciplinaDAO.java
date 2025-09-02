@@ -1,7 +1,7 @@
-package Data;
+package Data.DAO;
 
 import Business.Disciplina;
-import Utils.Parse;
+import Utils.Conversor.Parse;
 
 public class DisciplinaDAO extends DAO<Disciplina> {
     private static final String CAMINHO_ARQUIVO = "src/Data/File/disciplina.txt";

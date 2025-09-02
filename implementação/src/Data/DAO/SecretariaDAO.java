@@ -1,7 +1,7 @@
-package Data;
+package Data.DAO;
 
 import Business.Pessoa.Secretaria;
-import Utils.Parse;
+import Utils.Conversor.Parse;
 
 public class SecretariaDAO extends DAO<Secretaria> {
     private static final String CAMINHO_ARQUIVO = "src/Data/File/secretaria.txt";

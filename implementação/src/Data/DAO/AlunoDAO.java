@@ -1,7 +1,7 @@
-package Data;
+package Data.DAO;
 
 import Business.Pessoa.Aluno;
-import Utils.Parse;
+import Utils.Conversor.Parse;
 
 public class AlunoDAO extends DAO<Aluno> {
     private static final String CAMINHO_ARQUIVO = "src/Data/File/aluno.txt";

@@ -1,7 +1,7 @@
-package Data;
+package Data.DAO;
 
 import Business.Curriculo;
-import Utils.Parse;
+import Utils.Conversor.Parse;
 
 public class CurriculoDAO extends DAO<Curriculo> {
     private static final String CAMINHO_ARQUIVO = "src/Data/File/curriculo.txt";
