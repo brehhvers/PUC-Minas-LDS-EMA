@@ -27,14 +27,14 @@ public class CurriculoDAO extends DAO<Curriculo> {
         return Parse.curriculo(linha);
     }
 
-    public Curriculo carregarPorId(int id) throws IOException {
-        ArrayList<Curriculo> curriculos = super.carregar();
+    // public Curriculo carregarPorId(int id) throws IOException {
+    //     ArrayList<Curriculo> curriculos = super.carregar();
 
-        Curriculo recuperado = curriculos.stream()
-                .filter(c -> c.getId() == id)
-                .findFirst()
-                .orElse(null);
+    //     Curriculo recuperado = curriculos.stream()
+    //             .filter(c -> c.getId() == id)
+    //             .findFirst()
+    //             .orElse(null);
 
-        return recuperado;
-    }
+    //     return recuperado;
+    // }
 }

@@ -27,14 +27,14 @@ public class ProfessorDAO extends DAO<Professor> {
         return Parse.professor(linha);
     }
 
-    public Professor carregarPorMatricula(int matricula) throws IOException {
-        ArrayList<Professor> professors = super.carregar();
+    // public Professor carregarPorMatricula(int matricula) throws IOException {
+    //     ArrayList<Professor> professors = super.carregar();
 
-        Professor recuperado = professors.stream()
-                .filter(p -> p.getMatricula() == matricula)
-                .findFirst()
-                .orElse(null);
+    //     Professor recuperado = professors.stream()
+    //             .filter(p -> p.getMatricula() == matricula)
+    //             .findFirst()
+    //             .orElse(null);
 
-        return recuperado;
-    }
+    //     return recuperado;
+    // }
 }

@@ -28,13 +28,13 @@ public class PlanoDeEnsinoDAO extends DAO<PlanoDeEnsino> {
         return Parse.planoDeEnsino(linha);
     }
 
-    public ArrayList<PlanoDeEnsino> carregarPorAluno(int matricula) throws IOException {
-        ArrayList<PlanoDeEnsino> planos = super.carregar();
+    // public ArrayList<PlanoDeEnsino> carregarPorAluno(int matricula) throws IOException {
+    //     ArrayList<PlanoDeEnsino> planos = super.carregar();
 
-        ArrayList<PlanoDeEnsino> planosPorAluno = planos.stream()
-                .filter(p -> p.getAluno().getMatricula() == matricula)
-                .collect(Collectors.toCollection(ArrayList::new));
+    //     ArrayList<PlanoDeEnsino> planosPorAluno = planos.stream()
+    //             .filter(p -> p.getAluno().getMatricula() == matricula)
+    //             .collect(Collectors.toCollection(ArrayList::new));
 
-        return planosPorAluno;
-    }
+    //     return planosPorAluno;
+    // }
 }

@@ -15,7 +15,7 @@ public abstract class DAO<T> {
     public DAO(String caminhoArquivo) {
         this.caminhoArquivo = caminhoArquivo;
     }
-    
+
     protected abstract T parse(String linha);
 
     public void salvar(T objeto) throws IOException {
@@ -40,5 +40,20 @@ public abstract class DAO<T> {
         }
 
         return objetos;
+    }
+
+    public T carregarPorId(String id) throws IOException {
+        try (BufferedReader leitor = new BufferedReader(new FileReader(caminhoArquivo, StandardCharsets.UTF_8))) {
+
+            String linha;
+            while ((linha = leitor.readLine()) != null) {
+
+                if (linha.startsWith(id + ";")) {
+                    return parse(linha);
+                }
+            }
+        }
+
+        return null;
     }
 }

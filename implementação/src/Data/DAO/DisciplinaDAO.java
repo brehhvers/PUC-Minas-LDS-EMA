@@ -27,15 +27,15 @@ public class DisciplinaDAO extends DAO<Disciplina> {
         return Parse.disciplina(linha);
     }
 
-    public Disciplina carregarPorId(int id) throws IOException {
-        ArrayList<Disciplina> disciplinas = super.carregar();
+    // public Disciplina carregarPorId(int id) throws IOException {
+    //     ArrayList<Disciplina> disciplinas = super.carregar();
         
-        Disciplina recuperada = disciplinas
-                .stream()
-                .filter(d -> d.getId() == id)
-                .findFirst()
-                .orElse(null);
+    //     Disciplina recuperada = disciplinas
+    //             .stream()
+    //             .filter(d -> d.getId() == id)
+    //             .findFirst()
+    //             .orElse(null);
 
-        return recuperada;
-    }
+    //     return recuperada;
+    // }
 }
