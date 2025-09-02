@@ -32,8 +32,10 @@ public abstract class DAO<T> {
         ArrayList<T> objetos = new ArrayList<>();
 
         try (BufferedReader leitor = new BufferedReader(new FileReader(caminhoArquivo, StandardCharsets.UTF_8))) {
-            while (leitor.readLine() != null) {
-                objetos.add(parse(leitor.readLine()));
+
+            String linha;
+            while ((linha = leitor.readLine()) != null) {
+                objetos.add(parse(linha));
             }
         }
 
