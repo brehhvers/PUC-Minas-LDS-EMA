@@ -141,16 +141,16 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
         } 
     }
 
-    @Override
-    public String toString() {
-        String string = String.format(
-                "Plano de Ensino: %d%nid: %d%nNome: %s%nEmail: %s%nData de Cadastro: %s",
-                this.id,
-                this.matricula,
-                this.getNome(),
-                this.getEmail(),
-                this.dataCriacao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+    // @Override
+    // public String toString() {
+    //     String string = String.format(
+    //             "Plano de Ensino: %d%nid: %d%nNome: %s%nEmail: %s%nData de Cadastro: %s",
+    //             this.id,
+    //             this.matricula,
+    //             this.getNome(),
+    //             this.getEmail(),
+    //             this.dataCriacao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        return string;
-    }
+    //     return string;
+    // }
 }
