@@ -1,6 +1,7 @@
 package Business;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -138,5 +139,18 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
                                 this.getValorTotal());
             }
         } 
+    }
+
+    @Override
+    public String toString() {
+        String string = String.format(
+                "Plano de Ensino: %d%nid: %d%nNome: %s%nEmail: %s%nData de Cadastro: %s",
+                this.id,
+                this.matricula,
+                this.getNome(),
+                this.getEmail(),
+                this.dataCriacao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+        return string;
     }
 }

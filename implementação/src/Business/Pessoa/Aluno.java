@@ -31,6 +31,14 @@ public class Aluno extends Usuario {
         this.curriculo = curriculo;
     }
 
+    public ArrayList<PlanoDeEnsino> getPlanosDeEnsino() {
+        return planosDeEnsino;
+    }
+
+    public void setPlanosDeEnsino(ArrayList<PlanoDeEnsino> planosDeEnsino) {
+        this.planosDeEnsino = planosDeEnsino;
+    }
+
     public PlanoDeEnsino getPlanoAtivo() {
         if (this.planosDeEnsino.isEmpty())
             throw new IllegalStateException("Não há nenhum plano de ensino criado até o momento.");
