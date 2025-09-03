@@ -22,7 +22,7 @@ public abstract class DAO<T> {
 
     public void salvar(IPersistivel objeto) throws IOException {
         try (BufferedWriter escritor = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(caminhoArquivo, true), "UTF-8"))) {
+                new OutputStreamWriter(new FileOutputStream(caminhoArquivo, false), "UTF-8"))) {
 
             escritor.write(objeto.toPersist());
             escritor.newLine();
