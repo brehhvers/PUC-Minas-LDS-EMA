@@ -100,4 +100,16 @@ public class Aluno extends Usuario {
 
         return string;
     }
+
+      public String toPersist() {
+        return String.format(
+                "%d;%d;%s;%s;%s;%s;%s",
+                this.getCodPessoa(),
+                this.matricula,
+                this.getNome(),
+                this.getEmail(),
+                this.getSenha(),
+                this.isAtivo() ? "true" : "false",
+                this.getDataCadastro().toString());
+    }
 }
