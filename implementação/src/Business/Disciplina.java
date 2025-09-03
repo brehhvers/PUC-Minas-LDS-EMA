@@ -27,6 +27,9 @@ public class Disciplina implements IEfetivavel, IPersistivel {
     private StatusDisciplina status;
     private ArrayList<Aluno> alunos;
 
+    public Disciplina() {
+    }
+
     public Disciplina(TipoDisciplina tipo) {
         this.id = Id.gerar();
         this.tipo = tipo;
@@ -37,6 +40,10 @@ public class Disciplina implements IEfetivavel, IPersistivel {
 
     public int getId() {
         return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -59,12 +66,16 @@ public class Disciplina implements IEfetivavel, IPersistivel {
         return this.tipo;
     }
 
+    public void setTipo(TipoDisciplina tipo) {
+        this.tipo = tipo;
+    }
+
     public LocalDate getDataCriacao() {
         return this.dataCriacao;
     }
 
-    public void setTipo(TipoDisciplina tipo) {
-        this.tipo = tipo;
+    public void setDataCriacao(LocalDate dataCriacao) {
+        this.dataCriacao = dataCriacao;
     }
 
     public StatusDisciplina getStatus() {
@@ -73,10 +84,6 @@ public class Disciplina implements IEfetivavel, IPersistivel {
 
     public void setStatus(StatusDisciplina status) {
         this.status = status;
-    }
-
-    private boolean possuiVagas() {
-        return this.alunos.size() < QTDE_MAX_ALUNOS;
     }
 
     public Professor getProfessor() {
@@ -89,6 +96,10 @@ public class Disciplina implements IEfetivavel, IPersistivel {
 
     public ArrayList<Aluno> getAlunos() {
         return this.alunos;
+    }
+
+    private boolean possuiVagas() {
+        return this.alunos.size() < QTDE_MAX_ALUNOS;
     }
 
     public boolean addAluno(Aluno aluno) {
