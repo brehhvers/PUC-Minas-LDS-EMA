@@ -49,6 +49,10 @@ public class Aluno extends Usuario {
         this.planosDeEnsino = planosDeEnsino;
     }
 
+    public boolean addPlanoEnsino(PlanoDeEnsino planoDeEnsino) {
+        return this.planosDeEnsino.add(planoDeEnsino);
+    }
+
     public PlanoDeEnsino getPlanoAtivo() {
         if (this.planosDeEnsino.isEmpty())
             throw new IllegalStateException("Não há nenhum plano de ensino criado até o momento.");
