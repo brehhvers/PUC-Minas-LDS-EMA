@@ -1,11 +1,13 @@
 package Utils.Notificador;
 
+import Data.DAO.EmailDAO;
 import Interface.INotificavel;
 
 public class NotificadorEmail implements INotificavel<String, String> {
     private static final NotificadorEmail INSTANCIA = new NotificadorEmail();
 
-    private NotificadorEmail() {}
+    private NotificadorEmail() {
+    }
 
     public static NotificadorEmail getNotificador() {
         return INSTANCIA;
@@ -13,9 +15,15 @@ public class NotificadorEmail implements INotificavel<String, String> {
 
     @Override
     public void notificar(String mensagem, String email) {
-        System.out.println("=== Enviando e-mail ===");
-        System.out.println("Para: " + email);
-        System.out.println("Mensagem: " + mensagem);
-        System.out.println("=======================");
+        String emailCompleto = String.format(
+                "=== Enviando e-mail ===%nPara: %s%nMensagem: %s%n=======================%n%n",
+                email,
+                mensagem);
+
+        try {
+            EmailDAO.salvar(emailCompleto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
