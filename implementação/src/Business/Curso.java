@@ -10,7 +10,7 @@ public class Curso {
     private int numCreditos;
     private String departamento;
     private LocalDate dataCriacao;
-    
+
     public Curso(String nome, int numCreditos) {
         this.id = Id.gerar();
         this.nome = nome;
@@ -40,5 +40,26 @@ public class Curso {
 
     public LocalDate getDataCriacao() {
         return this.dataCriacao;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "ID do Curso: %d%nNome: %s%nNúmero de Créditos: %d%nDepartamento: %s%nData de Criação: %s",
+                this.id,
+                this.nome,
+                this.numCreditos,
+                this.departamento != null ? this.departamento : "Sem departamento",
+                this.dataCriacao.toString());
+    }
+
+    public String toPersist() {
+        return String.format(
+                "%d;%s;%d;%s;%s",
+                this.id,
+                this.nome,
+                this.numCreditos,
+                this.departamento != null ? this.departamento : "SEM_DEPARTAMENTO",
+                this.dataCriacao.toString());
     }
 }
