@@ -138,19 +138,21 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
                         .notificar("Plano de ensino " + this.getId() + " efetivado",
                                 this.getValorTotal());
             }
-        } 
+        }
     }
 
-    // @Override
-    // public String toString() {
-    //     String string = String.format(
-    //             "Plano de Ensino: %d%nid: %d%nNome: %s%nEmail: %s%nData de Cadastro: %s",
-    //             this.id,
-    //             this.matricula,
-    //             this.getNome(),
-    //             this.getEmail(),
-    //             this.dataCriacao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+    @Override
+    public String toString() {
+        String string = String.format(
+                "ID do Plano: %d%nAno: %d%nAluno: %s%nSemestre: %d%nStatus: %s%nData de Criação: %s%nDisciplinas: %s",
+                this.id,
+                this.ano,
+                this.aluno.getNome(),
+                this.semestre,
+                this.status,
+                this.dataCriacao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                (this.disciplinas != null ? this.disciplinas.toString() : "Nenhuma disciplina"));
 
-    //     return string;
-    // }
+        return string;
+    }
 }
