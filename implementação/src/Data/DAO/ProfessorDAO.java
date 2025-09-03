@@ -32,8 +32,15 @@ public class ProfessorDAO extends DAO<Professor> {
         String senha = dados[4];
         boolean isAtivo = Boolean.parseBoolean(dados[5]);
         LocalDate dataCadastro = LocalDate.parse(dados[6]);
-
         String[] disciplinasIds = dados[7].split(",");
+
+        professor.setCodPessoa(codPessoa);
+        professor.setMatricula(matricula);
+        professor.setNome(nome);
+        professor.setEmail(email);
+        professor.setSenha(senha);
+        professor.setAtivo(isAtivo);
+        professor.setDataCadastro(dataCadastro);;
 
         return professor;
     }

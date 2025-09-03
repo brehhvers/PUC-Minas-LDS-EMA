@@ -14,6 +14,11 @@ public class Aluno extends Usuario {
     private Curriculo curriculo;
     private ArrayList<PlanoDeEnsino> planosDeEnsino;
 
+    public Aluno() {
+        super();
+        this.planosDeEnsino = new ArrayList<>();
+    }
+
     public Aluno(String nome, String email, String senha) {
         super(nome, email, senha);
         this.matricula = Matricula.gerar();
@@ -22,6 +27,10 @@ public class Aluno extends Usuario {
 
     public int getMatricula() {
         return this.matricula;
+    }
+
+    public void setMatricula(int matricula) {
+        this.matricula = matricula;
     }
 
     public Curriculo getCurriculo() {
