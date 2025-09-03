@@ -143,15 +143,23 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
 
     @Override
     public String toString() {
+        String disciplinasInfo = "Nenhuma disciplina";
+
+        if (!disciplinas.isEmpty()) {
+            disciplinasInfo = disciplinas.stream()
+                    .map(d -> String.valueOf(d.getId()) + " - " + d.getNome())
+                    .collect(Collectors.joining("\n"));
+        }
+
         String string = String.format(
-                "ID do Plano: %d%nAno: %d%nAluno (Matrícula - Nome): %s%nSemestre: %d%nStatus: %s%nData de Criação: %s%nDisciplinas: %s",
+                "ID do Plano: %d%nAno: %d%nAluno (Matrícula - Nome): %s%nSemestre: %d%nStatus: %s%nData de Criação: %s%nDisciplinas (Matrícula - Nome): %s",
                 this.id,
                 this.ano,
                 this.aluno.getMatricula() + this.aluno.getNome(),
                 this.semestre,
                 this.status,
                 this.dataCriacao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                (this.disciplinas != null ? this.disciplinas.toString() : "Nenhuma disciplina"));
+                disciplinasInfo);
 
         return string;
     }
@@ -159,7 +167,7 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
     public String toPersist() {
         String disciplinasIds = "";
 
-        if (!disciplinas.isEmpty()) {
+        if (!this.disciplinas.isEmpty()) {
             disciplinasIds = this.disciplinas.stream()
                     .map(d -> String.valueOf(d.getId()))
                     .collect(Collectors.joining(","));

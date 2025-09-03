@@ -1,6 +1,7 @@
 package Business.Pessoa;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import Business.Disciplina;
 import Interface.IGerenciavel;
@@ -75,14 +76,23 @@ public class Professor extends Usuario implements IGerenciavel<Disciplina, Integ
     }
 
     public String toPersist() {
+        String disciplinasIds = "";
+
+        if (!this.disciplinas.isEmpty()) {
+            disciplinasIds = this.disciplinas.stream()
+                    .map(d -> String.valueOf(d.getId()))
+                    .collect(Collectors.joining(","));
+        }
+
         return String.format(
-                "%d;%d;%s;%s;%s;%s;%s",
+                "%d;%d;%s;%s;%s;%s;%s;%s",
                 this.getCodPessoa(),
                 this.matricula,
                 this.getNome(),
                 this.getEmail(),
                 this.getSenha(),
                 this.isAtivo() ? "true" : "false",
-                this.getDataCadastro().toString());
+                this.getDataCadastro().toString(),
+                disciplinasIds);
     }
 }

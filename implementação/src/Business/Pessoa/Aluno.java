@@ -1,6 +1,7 @@
 package Business.Pessoa;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import Business.Curriculo;
 import Business.PlanoDeEnsino;
@@ -101,15 +102,25 @@ public class Aluno extends Usuario {
         return string;
     }
 
-      public String toPersist() {
+    public String toPersist() {
+        String planosDeEnsinoIds = "";
+
+        if (!this.planosDeEnsino.isEmpty()) {
+            planosDeEnsinoIds = this.planosDeEnsino.stream()
+                    .map(p -> String.valueOf(p.getId()))
+                    .collect(Collectors.joining(","));
+        }
+
         return String.format(
-                "%d;%d;%s;%s;%s;%s;%s",
+                "%d;%d;%s;%s;%s;%s;%s;%d;%s",
                 this.getCodPessoa(),
                 this.matricula,
                 this.getNome(),
                 this.getEmail(),
                 this.getSenha(),
                 this.isAtivo() ? "true" : "false",
-                this.getDataCadastro().toString());
+                this.getDataCadastro().toString(),
+                this.curriculo.getId(),
+                planosDeEnsinoIds);
     }
 }

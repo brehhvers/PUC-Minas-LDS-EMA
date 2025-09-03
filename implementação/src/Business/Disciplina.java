@@ -150,7 +150,7 @@ public class Disciplina implements IEfetivavel {
 
     public String toPersist() {
         String alunosIds = "";
-        if (!alunos.isEmpty()) {
+        if (!this.alunos.isEmpty()) {
             alunosIds = this.alunos.stream()
                     .map(a -> String.valueOf(a.getMatricula()))
                     .collect(Collectors.joining(","));

@@ -54,8 +54,8 @@ public class Curriculo implements IGerenciavel<String, String> {
     public String toString() {
         String disciplinasInfo = "Nenhuma disciplina";
 
-        if (!disciplinas.isEmpty()) {
-            disciplinasInfo = String.join("\n", disciplinas);
+        if (!this.disciplinas.isEmpty()) {
+            disciplinasInfo = String.join("\n", this.disciplinas);
         }
 
         return String.format(
