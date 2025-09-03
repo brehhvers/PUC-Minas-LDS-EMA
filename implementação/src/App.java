@@ -1,6 +1,8 @@
 import java.io.PrintStream;
 import java.util.ArrayList;
 
+import Business.Pessoa.Aluno;
+import Business.Pessoa.Professor;
 import Business.Pessoa.Secretaria;
 import Business.Pessoa.Usuario;
 import Data.DAO.AlunoDAO;
@@ -12,9 +14,13 @@ import Enum.TipoAcesso;
 public class App {
     static PrintStream out = System.out;
     static SecretariaDAO secretariaDAO = SecretariaDAO.getDAO();
+    static ProfessorDAO professorDAO = ProfessorDAO.getDAO();
+    static AlunoDAO alunoDAO = AlunoDAO.getDAO();
     static ArrayList<Secretaria> secretarias = new ArrayList<>();
+    static ArrayList<Professor> professores = new ArrayList<>();
+    static ArrayList<Aluno> alunos = new ArrayList<>();
 
-    static void inicializaSecretarias() {
+    static void inicializador() {
         try {
             secretarias.addAll(secretariaDAO.carregar());
             if (secretarias.isEmpty()) {
@@ -23,40 +29,35 @@ public class App {
                         "alice@jabberwock",
                         "alice"
                 );
-                secretariaDAO.salvar(novaSecretaria);
-                inicializaSecretarias();
+                secretarias.add(novaSecretaria);
             }
+            professores.addAll(professorDAO.carregar());
+            alunos.addAll(alunoDAO.carregar());
         } catch (Exception e) {
-            out.println(e.getMessage() + " Ao inicializar secretárias.");
+            out.println(e.getMessage() + " Ao inicializar usuários.");
         }
     }
 
     static boolean direcionaAutenticacao(TipoAcesso cargo, String infoAcesso) {
         return switch (cargo) {
-            case SECRETARIA -> checaAutorizacao(infoAcesso, SecretariaDAO.getDAO());
-            case PROFESSOR -> checaAutorizacao(infoAcesso, ProfessorDAO.getDAO());
-            case ALUNO -> checaAutorizacao(infoAcesso, AlunoDAO.getDAO());
+            case SECRETARIA -> checaAutorizacao(infoAcesso, secretarias);
+            case PROFESSOR -> checaAutorizacao(infoAcesso, professores);
+            case ALUNO -> checaAutorizacao(infoAcesso, alunos);
         };
     }
 
-    static <T> boolean checaAutorizacao(String infoAcesso, DAO<T> dao) {
+    static <T> boolean checaAutorizacao(String infoAcesso, ArrayList<T> usuarios) {
         infoAcesso = infoAcesso.trim();
         String[] infos = infoAcesso.split(";");
+        if (infos.length != 2) {
+            return false;
+        }
 
-        ArrayList<T> usuarios;
-        if (infos.length == 2) {
-            try {
-                usuarios = new ArrayList<>(dao.carregar());
-            } catch (Exception e) {
-                out.println(e.getMessage());
-                return false;
-            }
-            for (T usuario : usuarios) {
-                if (usuario instanceof Usuario) {
-                    if (((Usuario) usuario).getCodPessoa() == (Integer.parseInt(infos[0])) &&
-                            ((Usuario) usuario).getSenha().equals(infos[1])) {
-                        return true;
-                    }
+        for (T usuario : usuarios) {
+            if (usuario instanceof Usuario) {
+                if (((Usuario) usuario).getCodPessoa() == (Integer.parseInt(infos[0])) &&
+                        ((Usuario) usuario).getSenha().equals(infos[1])) {
+                    return true;
                 }
             }
         }
@@ -65,7 +66,7 @@ public class App {
 
 
     public static void main(String[] args) {
-        inicializaSecretarias();
-        out.println(direcionaAutenticacao(TipoAcesso.PROFESSOR, "954619;glados"));
+        inicializador();
+        out.println(direcionaAutenticacao(TipoAcesso.SECRETARIA, "954617;alice"));
     }
 }
