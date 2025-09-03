@@ -68,4 +68,5 @@ public abstract class Usuario {
     }
 
     public abstract String toString();
+    public abstract String toPersist();
 }

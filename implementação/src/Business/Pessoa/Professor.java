@@ -75,6 +75,7 @@ public class Professor extends Usuario implements IGerenciavel<Disciplina, Integ
         return string;
     }
 
+    @Override
     public String toPersist() {
         String disciplinasIds = "";
 

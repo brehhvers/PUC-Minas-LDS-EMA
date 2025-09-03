@@ -102,6 +102,7 @@ public class Aluno extends Usuario {
         return string;
     }
 
+    @Override
     public String toPersist() {
         String planosDeEnsinoIds = "";
 
