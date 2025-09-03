@@ -45,6 +45,10 @@ public class Aluno extends Usuario {
         return planosDeEnsino;
     }
 
+    public boolean addPlanoEnsino(PlanoDeEnsino planoDeEnsino) {
+        return this.planosDeEnsino.add(planoDeEnsino);
+    }
+
     public void setPlanosDeEnsino(ArrayList<PlanoDeEnsino> planosDeEnsino) {
         this.planosDeEnsino = planosDeEnsino;
     }
