@@ -1,7 +1,8 @@
 package Data.DAO;
 
+import java.time.LocalDate;
+
 import Business.Curso;
-import Data.Conversor.Parse;
 
 public class CursoDAO extends DAO<Curso> {
     private static final String CAMINHO_ARQUIVO = "implementação/src/Data/File/curso.txt";
@@ -21,6 +22,21 @@ public class CursoDAO extends DAO<Curso> {
 
     @Override
     protected Curso parse(String linha) {
-        return Parse.curso(linha);
+        String[] dados = linha.split(";");
+        Curso curso = new Curso();
+
+        int id = Integer.parseInt(dados[0]);
+        String nome = dados[1];
+        int numCreditos = Integer.parseInt(dados[2]);
+        String departamento = dados[3];
+        LocalDate dataCriacao = LocalDate.parse(dados[4]);
+
+        curso.setId(id);
+        curso.setNome(nome);
+        curso.setNumCreditos(numCreditos);
+        curso.setDataCriacao(dataCriacao);
+        curso.setDepartamento(departamento);
+
+        return curso;
     }
 }

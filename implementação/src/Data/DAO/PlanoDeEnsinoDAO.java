@@ -41,8 +41,8 @@ public class PlanoDeEnsinoDAO extends DAO<PlanoDeEnsino> {
             aluno = AlunoDAO.getDAO().carregarPorId(dados[3]);
             planoDeEnsino.setAluno(aluno);
 
-            for (String disciplinasId : disciplinasIds) {
-                Disciplina disciplina = DisciplinaDAO.getDAO().carregarPorId(disciplinasId);
+            for (String disciplinaId : disciplinasIds) {
+                Disciplina disciplina = DisciplinaDAO.getDAO().carregarPorId(disciplinaId);
                 planoDeEnsino.addDisciplina(disciplina);
             }
         } catch (Exception e) {

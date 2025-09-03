@@ -13,6 +13,9 @@ public class Curso implements IPersistivel {
     private String departamento;
     private LocalDate dataCriacao;
 
+    public Curso() {
+    }
+
     public Curso(String nome, int numCreditos) {
         this.id = Id.gerar();
         this.nome = nome;
@@ -24,12 +27,24 @@ public class Curso implements IPersistivel {
         return this.id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return this.nome;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public int getNumCreditos() {
         return this.numCreditos;
+    }
+
+    public void setNumCreditos(int numCreditos) {
+        this.numCreditos = numCreditos;
     }
 
     public String getDepartamento() {
@@ -42,6 +57,10 @@ public class Curso implements IPersistivel {
 
     public LocalDate getDataCriacao() {
         return this.dataCriacao;
+    }
+    
+    public void setDataCriacao(LocalDate dataCriacao) {
+        this.dataCriacao = dataCriacao;
     }
 
     @Override

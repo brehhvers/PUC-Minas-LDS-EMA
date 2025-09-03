@@ -59,6 +59,6 @@ public class DisciplinaDAO extends DAO<Disciplina> {
         disciplina.setStatus(status);
         disciplina.setProfessor(professor);
 
-        return null;
+        return disciplina;
     }
 }
