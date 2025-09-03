@@ -15,6 +15,9 @@ public abstract class Usuario implements IPersistivel {
     private LocalDate dataCadastro;
     protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+    public Usuario() {
+    }
+
     public Usuario(String nome, String email, String senha) {
         this.codPessoa = CodPessoa.gerar();
         this.nome = nome;
@@ -26,6 +29,10 @@ public abstract class Usuario implements IPersistivel {
 
     public int getCodPessoa() {
         return this.codPessoa;
+    }
+
+    public void setCodPessoa(int codPessoa) {
+        this.codPessoa = codPessoa;
     }
 
     public String getNome() {

@@ -1,7 +1,8 @@
 package Data.DAO;
 
+import java.time.LocalDate;
+
 import Business.Pessoa.Secretaria;
-import Data.Conversor.Parse;
 
 public class SecretariaDAO extends DAO<Secretaria> {
     private static final String CAMINHO_ARQUIVO = "implementação/src/Data/File/secretaria.txt";
@@ -21,6 +22,23 @@ public class SecretariaDAO extends DAO<Secretaria> {
 
     @Override
     protected Secretaria parse(String linha) {
-        return Parse.secretaria(linha);
+        String[] dados = linha.split(";");
+        Secretaria secretaria = new Secretaria();
+
+        int codPessoa = Integer.parseInt(dados[0]);
+        String nome = dados[1];
+        String email = dados[2];
+        String senha = dados[3];
+        boolean isAtivo = Boolean.parseBoolean(dados[4]);
+        LocalDate dataCadastro = LocalDate.parse(dados[5]);
+
+        secretaria.setCodPessoa(codPessoa);
+        secretaria.setNome(nome);
+        secretaria.setEmail(email);
+        secretaria.setSenha(senha);
+        secretaria.setAtivo(isAtivo);
+        secretaria.setDataCadastro(dataCadastro);
+
+        return secretaria;
     }
 }

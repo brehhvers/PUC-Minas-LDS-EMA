@@ -9,6 +9,10 @@ import Enum.TipoDisciplina;
 import Interface.IEfetivavel;
 
 public class Secretaria extends Usuario {
+    public Secretaria() {
+        super();
+    }
+    
     public Secretaria(String nome, String email, String senha) {
         super(nome, email, senha);
     }
