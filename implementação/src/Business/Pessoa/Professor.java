@@ -11,6 +11,11 @@ public class Professor extends Usuario implements IGerenciavel<Disciplina, Integ
     private int matricula;
     private ArrayList<Disciplina> disciplinas;
 
+    public Professor() {
+        super();
+        this.disciplinas = new ArrayList<>();
+    }
+
     public Professor(String nome, String email, String senha) {
         super(nome, email, senha);
         this.matricula = Matricula.gerar();
@@ -19,6 +24,10 @@ public class Professor extends Usuario implements IGerenciavel<Disciplina, Integ
 
     public int getMatricula() {
         return this.matricula;
+    }
+
+    public void setMatricula(int matricula) {
+        this.matricula = matricula;
     }
 
     public ArrayList<Disciplina> getDisciplinas() {
