@@ -4,7 +4,7 @@ import Business.Pessoa.Secretaria;
 import Data.Conversor.Parse;
 
 public class SecretariaDAO extends DAO<Secretaria> {
-    private static final String CAMINHO_ARQUIVO = "src/Data/File/secretaria.txt";
+    private static final String CAMINHO_ARQUIVO = "implementação/src/Data/File/secretaria.txt";
     private static SecretariaDAO INSTANCIA;
 
     private SecretariaDAO() {

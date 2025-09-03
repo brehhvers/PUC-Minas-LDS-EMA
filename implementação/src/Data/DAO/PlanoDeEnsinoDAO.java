@@ -4,7 +4,7 @@ import Business.PlanoDeEnsino;
 import Data.Conversor.Parse;
 
 public class PlanoDeEnsinoDAO extends DAO<PlanoDeEnsino> {
-    private static final String CAMINHO_ARQUIVO = "src/Data/File/planoDeEnsino.txt";
+    private static final String CAMINHO_ARQUIVO = "implementação/src/Data/File/planoDeEnsino.txt";
     private static PlanoDeEnsinoDAO INSTANCIA;
 
     private PlanoDeEnsinoDAO() {

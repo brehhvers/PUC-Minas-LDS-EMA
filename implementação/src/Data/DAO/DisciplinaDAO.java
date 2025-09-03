@@ -4,7 +4,7 @@ import Business.Disciplina;
 import Data.Conversor.Parse;
 
 public class DisciplinaDAO extends DAO<Disciplina> {
-    private static final String CAMINHO_ARQUIVO = "src/Data/File/disciplina.txt";
+    private static final String CAMINHO_ARQUIVO = "implementação/src/Data/File/disciplina.txt";
     private static DisciplinaDAO INSTANCIA;
 
     private DisciplinaDAO() {

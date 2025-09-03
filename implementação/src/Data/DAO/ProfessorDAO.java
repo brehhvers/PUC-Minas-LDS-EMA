@@ -4,7 +4,7 @@ import Business.Pessoa.Professor;
 import Data.Conversor.Parse;
 
 public class ProfessorDAO extends DAO<Professor> {
-    private static final String CAMINHO_ARQUIVO = "src/Data/File/professor.txt";
+    private static final String CAMINHO_ARQUIVO = "implementação/src/Data/File/professor.txt";
     private static ProfessorDAO INSTANCIA;
 
     private ProfessorDAO() {

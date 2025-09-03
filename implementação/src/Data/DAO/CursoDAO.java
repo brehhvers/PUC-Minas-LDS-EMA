@@ -4,7 +4,7 @@ import Business.Curso;
 import Data.Conversor.Parse;
 
 public class CursoDAO extends DAO<Curso> {
-    private static final String CAMINHO_ARQUIVO = "src/Data/File/curso.txt";
+    private static final String CAMINHO_ARQUIVO = "implementação/src/Data/File/curso.txt";
     private static CursoDAO INSTANCIA;
 
     private CursoDAO() {
