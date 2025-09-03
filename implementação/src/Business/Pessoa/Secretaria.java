@@ -39,7 +39,7 @@ public class Secretaria extends Usuario {
 
     public void consolidarMatriculas(ArrayList<IEfetivavel> disciplinas, ArrayList<Aluno> alunos) {
         disciplinas.stream().forEach(d -> d.efetivar());
-        
+
         alunos.stream().forEach(a -> {
             IEfetivavel planoDeEnsino = a.getPlanoAtivo();
             planoDeEnsino.efetivar();
@@ -56,5 +56,16 @@ public class Secretaria extends Usuario {
                 this.getDataCadastro().format(this.formatter));
 
         return string;
+    }
+
+    public String toPersist() {
+        return String.format(
+                "%d;%s;%s;%s;%s;%s",
+                this.getCodPessoa(),
+                this.getNome(),
+                this.getEmail(),
+                this.getSenha(),
+                this.isAtivo() ? "true" : "false",
+                this.getDataCadastro().toString());
     }
 }
