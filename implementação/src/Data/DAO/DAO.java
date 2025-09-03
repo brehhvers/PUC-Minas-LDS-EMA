@@ -9,6 +9,8 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
+import Interface.IPersistivel;
+
 public abstract class DAO<T> {
     private String caminhoArquivo;
 
@@ -18,11 +20,11 @@ public abstract class DAO<T> {
 
     protected abstract T parse(String linha);
 
-    public void salvar(T objeto) throws IOException {
+    public void salvar(IPersistivel objeto) throws IOException {
         try (BufferedWriter escritor = new BufferedWriter(
                 new OutputStreamWriter(new FileOutputStream(caminhoArquivo, true), "UTF-8"))) {
 
-            escritor.write(objeto.toString());
+            escritor.write(objeto.toPersist());
             escritor.newLine();
             escritor.flush();
         }

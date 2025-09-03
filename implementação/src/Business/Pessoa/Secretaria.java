@@ -58,6 +58,7 @@ public class Secretaria extends Usuario {
         return string;
     }
 
+    @Override
     public String toPersist() {
         return String.format(
                 "%d;%s;%s;%s;%s;%s",
