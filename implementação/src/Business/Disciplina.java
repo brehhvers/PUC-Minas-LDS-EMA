@@ -28,6 +28,7 @@ public class Disciplina implements IEfetivavel, IPersistivel {
     private ArrayList<Aluno> alunos;
 
     public Disciplina() {
+        this.alunos = new ArrayList<>();
     }
 
     public Disciplina(TipoDisciplina tipo) {

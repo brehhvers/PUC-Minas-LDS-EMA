@@ -24,6 +24,10 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
     private LocalDate dataCriacao;
     private ArrayList<Disciplina> disciplinas;
 
+    public PlanoDeEnsino() {
+        this.disciplinas = new ArrayList<>();
+    }
+
     public PlanoDeEnsino(Aluno aluno) {
         this.id = Id.gerar();
         this.aluno = aluno;
@@ -34,6 +38,10 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
 
     public int getId() {
         return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getAno() {
@@ -56,6 +64,10 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
         return this.dataCriacao;
     }
 
+    public void setDataCriacao(LocalDate dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
     public StatusPlano getStatus() {
         return this.status;
     }
@@ -66,6 +78,10 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
 
     public Aluno getAluno() {
         return this.aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
     }
 
     public double getValorTotal() {

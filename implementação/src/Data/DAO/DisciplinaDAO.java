@@ -37,18 +37,16 @@ public class DisciplinaDAO extends DAO<Disciplina> {
         TipoDisciplina tipo = TipoDisciplina.valueOf(dados[4]);
         StatusDisciplina status = StatusDisciplina.valueOf((dados[6]));
 
-        String[] alunosId = dados[7].split(",");
-
+        String[] alunosIds = dados[7].split(",");
         Professor professor = null;
 
         try {
             professor = ProfessorDAO.getDAO().carregarPorId(dados[3]);
 
-            for (String alunoId : alunosId) {
+            for (String alunoId : alunosIds) {
                 Aluno aluno = AlunoDAO.getDAO().carregarPorId(alunoId);
                 disciplina.addAluno(aluno);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
