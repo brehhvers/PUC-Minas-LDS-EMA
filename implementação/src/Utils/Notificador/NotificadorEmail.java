@@ -15,13 +15,13 @@ public class NotificadorEmail implements INotificavel<String, String> {
 
     @Override
     public void notificar(String mensagem, String email) {
-        String emailCompleto = String.format(
+        String notificacao = String.format(
                 "=== Enviando e-mail ===%nPara: %s%nMensagem: %s%n=======================%n%n",
                 email,
                 mensagem);
 
         try {
-            EmailDAO.salvar(emailCompleto);
+            EmailDAO.getDAO().salvar(notificacao);
         } catch (Exception e) {
             e.printStackTrace();
         }

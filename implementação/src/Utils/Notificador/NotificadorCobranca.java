@@ -1,11 +1,13 @@
 package Utils.Notificador;
 
+import Data.DAO.CobrancaDAO;
 import Interface.INotificavel;
 
 public class NotificadorCobranca implements INotificavel<String, Double> {
     private static final NotificadorCobranca INSTANCIA = new NotificadorCobranca();
 
-    private NotificadorCobranca() {}
+    private NotificadorCobranca() {
+    }
 
     public static NotificadorCobranca getNotificador() {
         return INSTANCIA;
@@ -13,9 +15,15 @@ public class NotificadorCobranca implements INotificavel<String, Double> {
 
     @Override
     public void notificar(String descricao, Double valor) {
-        System.out.println("=== Notificação de Cobrança ===");
-        System.out.println("Descrição: " + descricao);
-        System.out.println("Valor: R$ " + String.format("%.2f", valor));
-        System.out.println("===============================");
+        String notificacao = String.format(
+                "=== Notificação de Cobrança ===%nDescrição: %s%nValor: R$ %.2f%n===============================%n%n",
+                descricao,
+                valor);
+
+        try {
+            CobrancaDAO.getDAO().salvar(notificacao);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
