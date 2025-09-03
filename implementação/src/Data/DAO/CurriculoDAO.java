@@ -37,6 +37,7 @@ public class CurriculoDAO extends DAO<Curriculo> {
 
         LocalDate dataCriacao = LocalDate.parse(dados[2]);
         String[] disciplinasInfo = dados[3].split(",");
+        Curso curso = null;
 
         Curriculo curriculo = new Curriculo();
         curriculo.setId(id);
@@ -46,7 +47,6 @@ public class CurriculoDAO extends DAO<Curriculo> {
             curriculo.addDisciplina(disciplinaInfo);
         }
 
-        Curso curso = null;
         try {
             curso = CursoDAO.getDAO().carregarPorId(dados[1]);
         } catch (Exception e) {
