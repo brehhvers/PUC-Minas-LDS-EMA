@@ -14,6 +14,10 @@ public class Curriculo implements IGerenciavel<String, String>, IPersistivel {
     private LocalDate dataCriacao;
     private ArrayList<String> disciplinas;
 
+    public Curriculo() {
+        this.disciplinas = new ArrayList<>();
+    }
+
     public Curriculo(Curso curso) {
         this.id = Id.gerar();
         this.curso = curso;
@@ -25,12 +29,24 @@ public class Curriculo implements IGerenciavel<String, String>, IPersistivel {
         return this.id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Curso getCurso() {
         return this.curso;
     }
 
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+
     public LocalDate dataCriacao() {
         return this.dataCriacao;
+    }
+
+    public void setDataCriacao(LocalDate dataCriacao) {
+        this.dataCriacao = dataCriacao;
     }
 
     public ArrayList<String> getDisciplinas() {
