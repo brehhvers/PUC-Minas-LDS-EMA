@@ -11,10 +11,11 @@ import Enum.StatusPlano;
 import Enum.TipoDisciplina;
 import Interface.IEfetivavel;
 import Interface.IGerenciavel;
+import Interface.IPersistivel;
 import Utils.Identificador.Id;
 import Utils.Notificador.NotificadorCobranca;
 
-public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Integer> {
+public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Integer>, IPersistivel {
     private int id;
     private int ano;
     private Aluno aluno;
@@ -164,6 +165,7 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
         return string;
     }
 
+    @Override
     public String toPersist() {
         String disciplinasIds = "";
 

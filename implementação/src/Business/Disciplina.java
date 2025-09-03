@@ -10,10 +10,11 @@ import Business.Pessoa.Professor;
 import Enum.StatusDisciplina;
 import Enum.TipoDisciplina;
 import Interface.IEfetivavel;
+import Interface.IPersistivel;
 import Utils.Identificador.Id;
 import Utils.Notificador.NotificadorEmail;
 
-public class Disciplina implements IEfetivavel {
+public class Disciplina implements IEfetivavel, IPersistivel {
     private static final int QTDE_MIN_ALUNOS = 3;
     private static final int QTDE_MAX_ALUNOS = 60;
 
@@ -148,6 +149,7 @@ public class Disciplina implements IEfetivavel {
                 alunosInfo);
     }
 
+    @Override
     public String toPersist() {
         String alunosIds = "";
         if (!this.alunos.isEmpty()) {

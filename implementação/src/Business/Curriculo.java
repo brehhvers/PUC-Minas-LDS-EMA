@@ -5,9 +5,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import Interface.IGerenciavel;
+import Interface.IPersistivel;
 import Utils.Identificador.Id;
 
-public class Curriculo implements IGerenciavel<String, String> {
+public class Curriculo implements IGerenciavel<String, String>, IPersistivel {
     private int id;
     private Curso curso;
     private LocalDate dataCriacao;
@@ -64,5 +65,22 @@ public class Curriculo implements IGerenciavel<String, String> {
                 curso.getNome(),
                 this.dataCriacao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
                 disciplinasInfo);
+    }
+
+    @Override
+    public String toPersist() {
+        String disciplinasInfo = "Nenhuma disciplina";
+
+        if (!this.disciplinas.isEmpty()) {
+            disciplinasInfo = String.join(",", this.disciplinas);
+        }
+
+        return String.format(
+                "%d;%s;%s;%s",
+                this.id,
+                curso.getId(),
+                this.dataCriacao.toString(),
+                disciplinasInfo 
+        );
     }
 }

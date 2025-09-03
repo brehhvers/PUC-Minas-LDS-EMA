@@ -3,9 +3,10 @@ package Business.Pessoa;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import Interface.IPersistivel;
 import Utils.Identificador.CodPessoa;
 
-public abstract class Usuario {
+public abstract class Usuario implements IPersistivel {
     private int codPessoa;
     private String nome;
     private String email;

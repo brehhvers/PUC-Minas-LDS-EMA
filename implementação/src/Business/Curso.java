@@ -3,9 +3,10 @@ package Business;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import Interface.IPersistivel;
 import Utils.Identificador.Id;
 
-public class Curso {
+public class Curso implements IPersistivel {
     private int id;
     private String nome;
     private int numCreditos;
@@ -54,6 +55,7 @@ public class Curso {
                 this.dataCriacao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
+    @Override
     public String toPersist() {
         return String.format(
                 "%d;%s;%d;%s;%s",
