@@ -2,6 +2,7 @@ package Business;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import Business.Pessoa.Aluno;
 import Business.Pessoa.Professor;
@@ -120,5 +121,49 @@ public class Disciplina implements IEfetivavel {
         } else {
             this.status = StatusDisciplina.ATIVA;
         }
+    }
+
+    @Override
+    public String toString() {
+        String alunosInfo = "";
+
+        if (!alunos.isEmpty()) {
+            alunosInfo = alunos.stream()
+                    .map(a -> String.valueOf(a.getMatricula()) + " - " + a.getNome())
+                    .collect(Collectors.joining("\n"));
+        } else {
+            alunosInfo = "Nenhum aluno";
+        }
+
+        return String.format(
+                "ID da Disciplina: %d%nNome: %s%nValor: %.2f%nProfessor (Matrícula - Nome): %s%nTipo: %s%nData de Criação: %s%nStatus: %s%nAlunos (Matrícula - Nome): %s",
+                this.id,
+                this.nome,
+                this.valor,
+                this.professor.getMatricula() + this.professor.getNome(),
+                this.tipo.name(),
+                this.dataCriacao.toString(),
+                this.status.name(),
+                alunosInfo);
+    }
+
+    public String toPersist() {
+        String alunosIds = "";
+        if (!alunos.isEmpty()) {
+            alunosIds = this.alunos.stream()
+                    .map(a -> String.valueOf(a.getMatricula()))
+                    .collect(Collectors.joining(","));
+        }
+
+        return String.format(
+                "%d;%s;%.2f;%s;%s;%s;%s;%s",
+                this.id,
+                this.nome,
+                this.valor,
+                this.professor.getMatricula(),
+                this.tipo.name(),
+                this.dataCriacao.toString(),
+                this.status.name(),
+                alunosIds);
     }
 }

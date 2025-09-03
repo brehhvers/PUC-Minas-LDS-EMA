@@ -144,15 +144,35 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
     @Override
     public String toString() {
         String string = String.format(
-                "ID do Plano: %d%nAno: %d%nAluno: %s%nSemestre: %d%nStatus: %s%nData de Criação: %s%nDisciplinas: %s",
+                "ID do Plano: %d%nAno: %d%nAluno (Matrícula - Nome): %s%nSemestre: %d%nStatus: %s%nData de Criação: %s%nDisciplinas: %s",
                 this.id,
                 this.ano,
-                this.aluno.getNome(),
+                this.aluno.getMatricula() + this.aluno.getNome(),
                 this.semestre,
                 this.status,
                 this.dataCriacao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
                 (this.disciplinas != null ? this.disciplinas.toString() : "Nenhuma disciplina"));
 
         return string;
+    }
+
+    public String toPersist() {
+        String disciplinasIds = "";
+
+        if (!disciplinas.isEmpty()) {
+            disciplinasIds = this.disciplinas.stream()
+                    .map(d -> String.valueOf(d.getId()))
+                    .collect(Collectors.joining(","));
+        }
+
+        return String.format(
+                "%d;%d;%d;%d;%s;%s;%s",
+                this.id,
+                this.ano,
+                this.semestre,
+                this.aluno.getMatricula(),
+                this.status.name(),
+                this.dataCriacao.toString(),
+                disciplinasIds);
     }
 }
