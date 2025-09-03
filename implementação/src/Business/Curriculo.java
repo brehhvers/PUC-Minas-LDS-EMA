@@ -1,6 +1,7 @@
 package Business;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import Interface.IGerenciavel;
@@ -47,5 +48,21 @@ public class Curriculo implements IGerenciavel<String, String> {
         } else {
             throw new IllegalArgumentException("Disciplina inexistente no currículo.");
         }
+    }
+
+    @Override
+    public String toString() {
+        String disciplinasInfo = "Nenhuma disciplina";
+
+        if (!disciplinas.isEmpty()) {
+            disciplinasInfo = String.join("\n", disciplinas);
+        }
+
+        return String.format(
+                "ID do Currículo: %d%nCurso: %s%nData de Criação: %s%nDisciplinas:%n%s",
+                this.id,
+                curso.getNome(),
+                this.dataCriacao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                disciplinasInfo);
     }
 }

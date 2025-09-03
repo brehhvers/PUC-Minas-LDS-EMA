@@ -1,6 +1,7 @@
 package Business;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import Utils.Identificador.Id;
 
@@ -50,7 +51,7 @@ public class Curso {
                 this.nome,
                 this.numCreditos,
                 this.departamento != null ? this.departamento : "Sem departamento",
-                this.dataCriacao.toString());
+                this.dataCriacao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
     public String toPersist() {

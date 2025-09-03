@@ -1,6 +1,7 @@
 package Business;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -142,7 +143,7 @@ public class Disciplina implements IEfetivavel {
                 this.valor,
                 this.professor.getMatricula() + this.professor.getNome(),
                 this.tipo.name(),
-                this.dataCriacao.toString(),
+                this.dataCriacao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
                 this.status.name(),
                 alunosInfo);
     }
