@@ -30,6 +30,19 @@ public abstract class DAO<T> {
         }
     }
 
+    public void salvarTodos(ArrayList<? extends IPersistivel> objetos) throws IOException {
+        try (BufferedWriter escritor = new BufferedWriter(
+                new OutputStreamWriter(new FileOutputStream(caminhoArquivo, false), "UTF-8"))) {
+
+            for (IPersistivel obj : objetos) {
+                escritor.write(obj.toPersist());
+                escritor.newLine();
+            }
+            
+            escritor.flush();
+        }
+    }
+
     public ArrayList<T> carregar() throws IOException {
         ArrayList<T> objetos = new ArrayList<>();
 

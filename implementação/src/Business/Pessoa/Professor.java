@@ -49,7 +49,7 @@ public class Professor extends Usuario implements IGerenciavel<Disciplina, Integ
                 .filter(d -> d.getId() == idDisciplina)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(
-                        "Nenhuma disciplina corresponde ao código fornecido."));
+                        "Nenhuma disciplina correspondente ao código fornecido."));
 
         return disciplinaRecuperada.getAlunos();
     }
