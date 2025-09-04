@@ -7,10 +7,10 @@ import Business.Pessoa.Professor;
 import Business.Pessoa.Secretaria;
 import Business.Pessoa.Usuario;
 import Data.DAO.AlunoDAO;
-import Data.DAO.DAO;
 import Data.DAO.ProfessorDAO;
 import Data.DAO.SecretariaDAO;
 import Enum.TipoAcesso;
+import View.SecretariaInterface;
 
 public class App {
     static Scanner in = new Scanner(System.in);
@@ -81,7 +81,22 @@ public class App {
         do {
             imprimirMenu(header, opcoes);
             flag = in.nextInt();
+            in.nextLine(); // Limpar buffer
 
+            switch (flag) {
+                case 1 -> {
+                    if (!secretarias.isEmpty()) {
+                        SecretariaInterface secretariaInterface = new SecretariaInterface(in, secretarias.get(0));
+                        secretariaInterface.menuSecretaria();
+                    } else {
+                        out.println("Nenhuma secretária cadastrada no sistema.");
+                    }
+                }
+                case 2 -> out.println("Menu do Professor - Em desenvolvimento");
+                case 3 -> out.println("Menu do Aluno - Em desenvolvimento");
+                case 0 -> out.println("Sistema encerrado.");
+                default -> out.println("Opção inválida!");
+            }
         } while (flag != 0);
     }
 
