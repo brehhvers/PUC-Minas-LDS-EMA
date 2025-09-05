@@ -8,7 +8,7 @@ import java.util.Map;
 import Business.Pessoa.Professor;
 
 public class ProfessorDAO extends DAO<Professor> {
-    private static final String CAMINHO_ARQUIVO = "implementação/src/Data/File/professor.txt";
+    private static final String CAMINHO_ARQUIVO = "src/Data/File/professor.txt";
     private static ProfessorDAO INSTANCIA;
 
     private Map<Integer, Professor> cache = new HashMap<>();

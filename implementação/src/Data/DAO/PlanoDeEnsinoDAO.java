@@ -12,7 +12,7 @@ import Business.Pessoa.Aluno;
 import Enum.StatusPlano;
 
 public class PlanoDeEnsinoDAO extends DAO<PlanoDeEnsino> {
-    private static final String CAMINHO_ARQUIVO = "implementação/src/Data/File/planoDeEnsino.txt";
+    private static final String CAMINHO_ARQUIVO = "src/Data/File/planoDeEnsino.txt";
     private static PlanoDeEnsinoDAO INSTANCIA;
 
     private Map<Integer, PlanoDeEnsino> cache = new HashMap<>();
