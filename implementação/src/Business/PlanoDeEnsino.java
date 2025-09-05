@@ -14,6 +14,7 @@ import Interface.IGerenciavel;
 import Interface.IPersistivel;
 import Utils.Identificador.Id;
 import Utils.Notificador.NotificadorCobranca;
+import Utils.Notificador.NotificadorEmail;
 
 public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Integer>, IPersistivel {
     private int id;
@@ -161,8 +162,23 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
 
                 NotificadorCobranca
                         .getNotificador()
-                        .notificar("Plano de ensino " + this.getId() + " efetivado",
+                        .notificar(
+                                "O plano de ensino ID " + this.getId() + " do aluno " + this.aluno.getNome()
+                                        + " foi efetivado com sucesso. Valor total: ",
                                 this.getValorTotal());
+
+                StringBuilder listaDisciplinas = new StringBuilder();
+                for (Disciplina d : this.disciplinas) {
+                    listaDisciplinas.append("- ").append(d.getNome()).append("\n");
+                }
+
+                String mensagem = "Olá " + this.aluno.getNome() + ",\n\n"
+                        + "Seu plano de ensino ID " + this.getId() + " foi efetivado com sucesso.\n"
+                        + "Disciplinas incluídas:\n" + listaDisciplinas.toString()
+                        + "\nValor final total do plano: R$ " + String.format("%.2f", this.getValorTotal()) + "\n\n"
+                        + "Atenciosamente,\nEquipe Acadêmica";
+
+                NotificadorEmail.getNotificador().notificar(mensagem, this.aluno.getEmail());
             }
         }
     }

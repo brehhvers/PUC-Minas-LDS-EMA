@@ -41,12 +41,12 @@ public class Secretaria extends Usuario {
         return new Secretaria(nome, email, senha);
     }
 
-    public void consolidarMatriculas(ArrayList<IEfetivavel> disciplinas, ArrayList<Aluno> alunos) {
+    public void consolidarMatriculas(ArrayList<? extends IEfetivavel> disciplinas, ArrayList<Aluno> alunos) {
         disciplinas.stream().forEach(d -> d.efetivar());
 
         alunos.stream().forEach(a -> {
             IEfetivavel planoDeEnsino = a.getPlanoAtivo();
-            planoDeEnsino.efetivar();
+            if (planoDeEnsino != null) planoDeEnsino.efetivar();
         });
     }
 

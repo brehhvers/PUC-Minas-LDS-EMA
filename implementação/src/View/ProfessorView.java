@@ -53,10 +53,13 @@ public class ProfessorView {
         if (disciplinas.isEmpty()) {
             System.out.println("Ainda não há registros para exibir.");
         } else {
-
-            System.out.println("Registros encontrados:");
+            System.out.println("Registros encontrados:\n");
             for (Disciplina disciplina : disciplinas) {
-                System.out.println(disciplina);
+                System.out.println("ID: " + disciplina.getId());
+                System.out.println("Nome: " + disciplina.getNome());
+                System.out.println("Tipo: " + disciplina.getTipo());
+                System.out.println("Status: " + disciplina.getStatus());
+                System.out.println("-------------------------------");
             }
         }
     }
@@ -75,12 +78,15 @@ public class ProfessorView {
                 System.out.println("Ainda não há registros para exibir.");
             } else {
 
-                System.out.println("Registros encontrados: ");
+                System.out.println("Registros encontrados:\n");
                 for (Aluno aluno : alunos) {
-                    System.out.println(aluno);
+                    System.out.println("Código: " + aluno.getCodPessoa());
+                    System.out.println("Nome: " + aluno.getNome());
+                    System.out.println("Email: " + aluno.getEmail());
+                    System.out.println("Ativo: " + aluno.isAtivo());
+                    System.out.println("-------------------------------");
                 }
             }
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -95,7 +101,10 @@ public class ProfessorView {
 
             System.out.println("Registros encontrados: ");
             for (Aluno aluno : alunos) {
-                System.out.println(aluno);
+                System.out.println("Código: " + aluno.getCodPessoa());
+                System.out.println("Nome: " + aluno.getNome());
+                System.out.println("Email: " + aluno.getEmail());
+                System.out.println("-------------------------------");
             }
         }
     }

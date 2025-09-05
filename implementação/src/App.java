@@ -22,11 +22,11 @@ import Enum.TipoDisciplina;
 import View.AlunoView;
 import View.Menu;
 import View.ProfessorView;
-import View.SecretariaInterface;
+import View.SecretariaView;
 
 public class App {
     static PrintStream out = System.out;
-    static Scanner in = new Scanner(System.in);
+    static Scanner in = new Scanner(System.in, "UTF-8");
 
     static AlunoDAO alunoDAO = AlunoDAO.getDAO();
     static CursoDAO cursoDAO = CursoDAO.getDAO();
@@ -272,8 +272,8 @@ public class App {
             Aluno aluno = (Aluno) direcionaAutenticacao(TipoAcesso.ALUNO);
             out.println("Bem-vindo(a), " + aluno.getNome() + "!");
 
-            AlunoView alunoInterface = new AlunoView(in, aluno, disciplinas);
-            alunoInterface.menu();
+            AlunoView alunoView = new AlunoView(in, aluno, disciplinas);
+            alunoView.menu();
 
         } catch (Exception e) {
             out.println(e.getMessage());
@@ -286,8 +286,8 @@ public class App {
             Professor professor = (Professor) direcionaAutenticacao(TipoAcesso.PROFESSOR);
             out.println("Bem-vindo(a), " + professor.getNome() + "!");
 
-            ProfessorView professorInterface = new ProfessorView(in, professor);
-            professorInterface.menu();
+            ProfessorView professorView = new ProfessorView(in, professor);
+            professorView.menu();
 
         } catch (Exception e) {
             out.println(e.getMessage());
@@ -300,10 +300,10 @@ public class App {
             Secretaria secretaria = (Secretaria) direcionaAutenticacao(TipoAcesso.SECRETARIA);
             out.println("Bem-vindo(a), " + secretaria.getNome() + "!");
 
-            SecretariaInterface secretariaInterface = new SecretariaInterface(
+            SecretariaView secretariaView = new SecretariaView(
                     in, secretaria, alunos, professores, secretarias,
                     disciplinas, cursos, curriculos);
-            secretariaInterface.menu();
+            secretariaView.menu();
 
         } catch (Exception e) {
             out.println(e.getMessage());

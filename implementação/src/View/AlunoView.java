@@ -175,7 +175,6 @@ public class AlunoView {
             boolean confirmado = aluno.confirmarPlanoDeEnsino();
             if (confirmado) {
                 System.out.println("Plano de ensino confirmado com sucesso!");
-                System.out.println("Suas matrículas foram efetivadas.");
             }
         } catch (Exception e) {
             System.out.println("Erro ao confirmar plano: " + e.getMessage());

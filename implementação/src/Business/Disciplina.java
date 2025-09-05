@@ -92,7 +92,15 @@ public class Disciplina implements IEfetivavel, IPersistivel {
     }
 
     public void setProfessor(Professor professor) {
+        if (this.professor != null) {
+            this.professor.removerDisciplina(this.id);
+        }
+
         this.professor = professor;
+
+        if (professor != null && !professor.getDisciplinas().contains(this)) {
+            professor.addDisciplina(this);
+        }
     }
 
     public ArrayList<Aluno> getAlunos() {
