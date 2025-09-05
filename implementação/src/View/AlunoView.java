@@ -32,6 +32,7 @@ public class AlunoView {
                 "6 - Cancelar plano de ensino",
                 "7 - Consultar disciplinas disponíveis",
                 "8 - Consultar histórico de planos",
+                "9 - Exibir detalhes do aluno(a)",
                 "0 - Voltar ao menu principal"
         };
 
@@ -49,10 +50,15 @@ public class AlunoView {
                 case 6 -> cancelarPlano();
                 case 7 -> consultardisciplinas();
                 case 8 -> consultarHistoricoPlanos();
+                case 9 -> listarDetalhesAluno();
                 case 0 -> System.out.println("Retornando ao menu principal...");
                 default -> System.out.println("Opção inválida!");
             }
         } while (opcao != 0);
+    }
+
+    private void listarDetalhesAluno() {
+        System.out.println(this.aluno);
     }
 
     private void criarNovoPlano() {
@@ -144,7 +150,8 @@ public class AlunoView {
             System.out.println("\n=== PLANO ATUAL ===");
             System.out.println("ID do Plano: " + planoAtual.getId());
             System.out.println("Status: " + planoAtual.getStatus());
-            System.out.println("Data de Criação: " + planoAtual.getDataCriacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            System.out.println("Data de Criação: "
+                    + planoAtual.getDataCriacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             System.out.println("Valor Total: R$ " + String.format("%.2f", planoAtual.getValorTotal()));
 
             ArrayList<Disciplina> disciplinas = planoAtual.getDisciplinas();
