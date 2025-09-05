@@ -18,8 +18,10 @@ import Data.DAO.PlanoDeEnsinoDAO;
 import Data.DAO.ProfessorDAO;
 import Data.DAO.SecretariaDAO;
 import Enum.TipoAcesso;
+import Enum.TipoDisciplina;
 import View.Menu;
 import View.ProfessorInterface;
+import View.SecretariaInterface;
 
 public class App {
     static PrintStream out = System.out;
@@ -44,24 +46,115 @@ public class App {
     static void inicializador() {
         try {
             disciplinas.addAll(disciplinaDAO.carregar());
-            professores.addAll(professorDAO.carregar());
-
-            planosDeEnsino.addAll(planoDeEnsinoDAO.carregar());
-            alunos.addAll(alunoDAO.carregar());
-
-            cursos.addAll(cursoDAO.carregar());
-            curriculos.addAll(curriculoDAO.carregar());
-            secretarias.addAll(secretariaDAO.carregar());
-
-            if (secretarias.isEmpty()) {
-                Secretaria novaSecretaria = new Secretaria(
-                        "Alice",
-                        "alice@jabberwock",
-                        "alice");
-                secretarias.add(novaSecretaria);
-            }
         } catch (Exception e) {
-            out.println(e.getMessage() + " Ao inicializar usuários.");
+            out.println("Aviso: Não foi possível carregar disciplinas: " + e.getMessage());
+        }
+        
+        try {
+            professores.addAll(professorDAO.carregar());
+        } catch (Exception e) {
+            out.println("Aviso: Não foi possível carregar professores: " + e.getMessage());
+        }
+
+        try {
+            planosDeEnsino.addAll(planoDeEnsinoDAO.carregar());
+        } catch (Exception e) {
+            out.println("Aviso: Não foi possível carregar planos de ensino: " + e.getMessage());
+        }
+        
+        try {
+            alunos.addAll(alunoDAO.carregar());
+        } catch (Exception e) {
+            out.println("Aviso: Não foi possível carregar alunos: " + e.getMessage());
+        }
+
+        try {
+            cursos.addAll(cursoDAO.carregar());
+        } catch (Exception e) {
+            out.println("Aviso: Não foi possível carregar cursos: " + e.getMessage());
+        }
+        
+        try {
+            curriculos.addAll(curriculoDAO.carregar());
+        } catch (Exception e) {
+            out.println("Aviso: Não foi possível carregar currículos: " + e.getMessage());
+        }
+        
+        try {
+            secretarias.addAll(secretariaDAO.carregar());
+        } catch (Exception e) {
+            out.println("Aviso: Não foi possível carregar secretarias: " + e.getMessage());
+        }
+
+        // Verificar se o sistema precisa ser populado com dados iniciais
+        popularSistemaInicial();
+    }
+
+    static void popularSistemaInicial() {
+        boolean sistemaVazio = secretarias.isEmpty() && professores.isEmpty() && 
+                              alunos.isEmpty() && cursos.isEmpty() && disciplinas.isEmpty();
+        
+        if (sistemaVazio) {
+            out.println("=== POPULANDO SISTEMA COM DADOS INICIAIS ===");
+            
+            // Criar secretaria padrão
+            Secretaria secretariaPadrao = new Secretaria(
+                    "seuBarriga",
+                    "seubarriga@email.com",
+                    "aluguel");
+            secretariaPadrao.setCodPessoa(123456);
+            secretarias.add(secretariaPadrao);
+            out.println("✓ Secretaria padrão criada: seuBarriga (código: 123456, senha: aluguel)");
+            
+            // Criar professor padrão
+            Professor professorPadrao = new Professor(
+                    "Dr. João Silva",
+                    "joao.silva@universidade.edu",
+                    "prof123");
+            professores.add(professorPadrao);
+            out.println("✓ Professor padrão criado: Dr. João Silva");
+            
+            // Criar curso padrão
+            Curso cursoPadrao = new Curso("Ciência da Computação", 240);
+            cursos.add(cursoPadrao);
+            out.println("✓ Curso padrão criado: Ciência da Computação");
+            
+            // Criar currículo padrão
+            Curriculo curriculoPadrao = new Curriculo(cursoPadrao);
+            curriculos.add(curriculoPadrao);
+            out.println("✓ Currículo padrão criado para Ciência da Computação");
+            
+            // Criar disciplinas padrão
+            Disciplina disciplina1 = new Disciplina(TipoDisciplina.OBRIGATORIA);
+            disciplina1.setNome("Programação I");
+            disciplina1.setValor(150.0);
+            disciplina1.setProfessor(professorPadrao);
+            disciplinas.add(disciplina1);
+            
+            Disciplina disciplina2 = new Disciplina(TipoDisciplina.OBRIGATORIA);
+            disciplina2.setNome("Estruturas de Dados");
+            disciplina2.setValor(200.0);
+            disciplina2.setProfessor(professorPadrao);
+            disciplinas.add(disciplina2);
+            
+            Disciplina disciplina3 = new Disciplina(TipoDisciplina.OPTATIVA);
+            disciplina3.setNome("Inteligência Artificial");
+            disciplina3.setValor(180.0);
+            disciplina3.setProfessor(professorPadrao);
+            disciplinas.add(disciplina3);
+            
+            out.println("✓ Disciplinas padrão criadas: Programação I, Estruturas de Dados, IA");
+            out.println("=== SISTEMA POPULADO COM SUCESSO ===\n");
+            
+        } else if (secretarias.isEmpty()) {
+            // Apenas criar secretaria se não existir
+            Secretaria novaSecretaria = new Secretaria(
+                    "seuBarriga",
+                    "seubarriga@email.com",
+                    "aluguel");
+            novaSecretaria.setCodPessoa(123456);
+            secretarias.add(novaSecretaria);
+            out.println("Usuário secretaria padrão criado: seuBarriga (código: 123456, senha: aluguel)");
         }
     }
 
@@ -126,6 +219,21 @@ public class App {
         }
     }
 
+    static void rotinaSecretaria() {
+        try {
+            Secretaria secretaria = (Secretaria) direcionaAutenticacao(TipoAcesso.SECRETARIA);
+            out.println("Bem-vindo(a), " + secretaria.getNome() + "!");
+
+            SecretariaInterface secretariaInterface = new SecretariaInterface(in, secretaria, 
+                alunos, professores, secretarias, cursos, disciplinas, curriculos);
+            secretariaInterface.menu();
+
+        } catch (Exception e) {
+            out.println(e.getMessage());
+            return;
+        }
+    }
+
     public static void main(String[] args) {
         inicializador();
 
@@ -143,7 +251,7 @@ public class App {
             opcao = in.nextInt();
 
             switch (opcao) {
-                case 1 -> out.println("Opção inválida!");
+                case 1 -> rotinaSecretaria();
                 case 2 -> rotinaProfessor();
                 case 3 -> out.println("Aluno");
                 default -> out.println("Opção inválida!");

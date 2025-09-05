@@ -134,7 +134,7 @@ public class Aluno extends Usuario {
                 this.getSenha(),
                 this.isAtivo() ? "true" : "false",
                 this.getDataCadastro().toString(),
-                this.curriculo.getId(),
+                this.curriculo != null ? this.curriculo.getId() : 0,
                 planosDeEnsinoIds);
     }
 }

@@ -7,8 +7,9 @@ import Business.Curso;
 import Business.Disciplina;
 import Enum.TipoDisciplina;
 import Interface.IEfetivavel;
+import Interface.ISecretaria;
 
-public class Secretaria extends Usuario {
+public class Secretaria extends Usuario implements ISecretaria {
     public Secretaria() {
         super();
     }
@@ -48,6 +49,63 @@ public class Secretaria extends Usuario {
             IEfetivavel planoDeEnsino = a.getPlanoAtivo();
             planoDeEnsino.efetivar();
         });
+    }
+
+    // Métodos de listagem - implementação básica
+    public ArrayList<Aluno> listarAlunos() {
+        // Este método será implementado na interface, não aqui
+        return new ArrayList<>();
+    }
+
+    public ArrayList<Professor> listarProfessores() {
+        // Este método será implementado na interface, não aqui
+        return new ArrayList<>();
+    }
+
+    public ArrayList<Secretaria> listarSecretarias() {
+        // Este método será implementado na interface, não aqui
+        return new ArrayList<>();
+    }
+
+    public ArrayList<Curso> listarCursos() {
+        // Este método será implementado na interface, não aqui
+        return new ArrayList<>();
+    }
+
+    public ArrayList<Disciplina> listarDisciplinas() {
+        // Este método será implementado na interface, não aqui
+        return new ArrayList<>();
+    }
+
+    public ArrayList<Curriculo> listarCurriculos() {
+        // Este método será implementado na interface, não aqui
+        return new ArrayList<>();
+    }
+
+    // Métodos de busca - implementação básica
+    public Aluno buscarAlunoPorCodigo(int codigo) {
+        // Este método será implementado na interface, não aqui
+        return null;
+    }
+
+    public Professor buscarProfessorPorCodigo(int codigo) {
+        // Este método será implementado na interface, não aqui
+        return null;
+    }
+
+    public Secretaria buscarSecretariaPorCodigo(int codigo) {
+        // Este método será implementado na interface, não aqui
+        return null;
+    }
+
+    public Curso buscarCursoPorId(int id) {
+        // Este método será implementado na interface, não aqui
+        return null;
+    }
+
+    public Disciplina buscarDisciplinaPorId(int id) {
+        // Este método será implementado na interface, não aqui
+        return null;
     }
 
     @Override
