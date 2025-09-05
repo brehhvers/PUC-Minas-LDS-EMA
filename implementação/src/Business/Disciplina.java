@@ -193,7 +193,7 @@ public class Disciplina implements IEfetivavel, IPersistivel {
                 this.id,
                 this.nome,
                 this.valor,
-                this.professor.getMatricula(),
+                this.professor.getCodPessoa(),
                 this.tipo.name(),
                 this.dataCriacao.toString(),
                 this.status.name(),

@@ -1,17 +1,11 @@
 package Data.DAO;
 
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
-
 import Business.Curso;
 
 public class CursoDAO extends DAO<Curso> {
     private static final String CAMINHO_ARQUIVO = "src/Data/File/curso.txt";
     private static CursoDAO INSTANCIA;
-
-    private Map<Integer, Curso> cache = new HashMap<>();
 
     private CursoDAO() {
         super(CAMINHO_ARQUIVO);
@@ -30,8 +24,8 @@ public class CursoDAO extends DAO<Curso> {
         String[] dados = linha.split(";");
 
         int id = Integer.parseInt(dados[0]);
-        if (cache.containsKey(id)) {
-            return cache.get(id);
+        if (this.cache.containsKey(id)) {
+            return this.cache.get(id);
         }
 
         String nome = dados[1];
@@ -46,18 +40,7 @@ public class CursoDAO extends DAO<Curso> {
         curso.setDataCriacao(dataCriacao);
         curso.setDepartamento(departamento);
 
-        cache.put(id, curso);
+        this.cache.put(id, curso);
         return curso;
-    }
-
-    @Override
-    public Curso carregarPorId(String id) throws IOException {
-        int idConvertido = Integer.parseInt(id);
-
-        if (cache.containsKey(idConvertido)) {
-            return cache.get(idConvertido);
-        }
-
-        return super.carregarPorId(id);
     }
 }

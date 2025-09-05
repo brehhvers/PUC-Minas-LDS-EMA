@@ -83,6 +83,10 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
 
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
+
+        if (aluno != null && !aluno.getPlanosDeEnsino().contains(this)) {
+            aluno.addPlanoEnsino(this);
+        }
     }
 
     public double getValorTotal() {
@@ -217,11 +221,11 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
         }
 
         return String.format(
-                "%d;%d;%d;%d;%s;%s;%s",
+                "%d;%d;%d;%s;%s;%s;%s",
                 this.id,
                 this.ano,
                 this.semestre,
-                this.aluno.getMatricula(),
+                (this.aluno != null ? String.valueOf(this.aluno.getCodPessoa()) : ""),
                 this.status.name(),
                 this.dataCriacao.toString(),
                 disciplinasIds);

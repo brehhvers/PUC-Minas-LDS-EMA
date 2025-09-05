@@ -8,11 +8,14 @@ import java.io.FileReader;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import Interface.IPersistivel;
 
 public abstract class DAO<T> {
     private String caminhoArquivo;
+    protected Map<Integer, T> cache = new HashMap<>();
 
     public DAO(String caminhoArquivo) {
         this.caminhoArquivo = caminhoArquivo;
@@ -38,7 +41,7 @@ public abstract class DAO<T> {
                 escritor.write(obj.toPersist());
                 escritor.newLine();
             }
-            
+
             escritor.flush();
         }
     }
@@ -50,7 +53,7 @@ public abstract class DAO<T> {
 
             String linha;
             while ((linha = leitor.readLine()) != null) {
-                objetos.add(parse(linha));
+                objetos.add(this.parse(linha));
             }
         }
 
@@ -58,13 +61,18 @@ public abstract class DAO<T> {
     }
 
     public T carregarPorId(String id) throws IOException {
+        int idConvertido = Integer.parseInt(id);
+        if (cache.containsKey(idConvertido)) {
+            return cache.get(idConvertido);
+        }
+
         try (BufferedReader leitor = new BufferedReader(new FileReader(caminhoArquivo, StandardCharsets.UTF_8))) {
 
             String linha;
             while ((linha = leitor.readLine()) != null) {
 
                 if (linha.startsWith(id + ";")) {
-                    return parse(linha);
+                    return this.parse(linha);
                 }
             }
         }

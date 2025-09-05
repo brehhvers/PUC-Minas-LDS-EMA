@@ -126,7 +126,7 @@ public class Aluno extends Usuario {
         }
 
         return String.format(
-                "%d;%d;%s;%s;%s;%s;%s;%d;%s",
+                "%d;%d;%s;%s;%s;%s;%s;%s;%s",
                 this.getCodPessoa(),
                 this.matricula,
                 this.getNome(),
@@ -134,7 +134,7 @@ public class Aluno extends Usuario {
                 this.getSenha(),
                 this.isAtivo() ? "true" : "false",
                 this.getDataCadastro().toString(),
-                this.curriculo.getId(),
+                (this.curriculo != null ? String.valueOf(this.curriculo.getId()) : ""),
                 planosDeEnsinoIds);
     }
 }

@@ -94,9 +94,8 @@ public class Curriculo implements IGerenciavel<String, String>, IPersistivel {
         return String.format(
                 "%d;%s;%s;%s",
                 this.id,
-                curso.getId(),
                 this.dataCriacao.toString(),
-                disciplinasInfo 
-        );
+                disciplinasInfo,
+                (this.curso != null ? this.curso.getId() : ""));
     }
 }

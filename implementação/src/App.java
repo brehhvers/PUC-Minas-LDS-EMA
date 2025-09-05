@@ -120,6 +120,7 @@ public class App {
             out.println("===============================");
 
             Curso cursoPadrao = new Curso("Ciência da Computação", 240);
+            cursoPadrao.setDepartamento("ICEI");
             cursos.add(cursoPadrao);
 
             out.println("Curso padrão criado: Ciência da Computação");
