@@ -52,16 +52,26 @@ public class App {
             cursos.addAll(cursoDAO.carregar());
             curriculos.addAll(curriculoDAO.carregar());
             secretarias.addAll(secretariaDAO.carregar());
-
-            if (secretarias.isEmpty()) {
-                Secretaria novaSecretaria = new Secretaria(
-                        "Alice",
-                        "alice@jabberwock",
-                        "alice");
-                secretarias.add(novaSecretaria);
-            }
         } catch (Exception e) {
-            out.println(e.getMessage() + " Ao inicializar usuários.");
+            out.println("Erro ao carregar dados: " + e.getMessage());
+        }
+        
+        // Verificar se secretária está vazia e popular
+        if (secretarias.isEmpty()) {
+            out.println("Secretária não encontrada. Criando secretária padrão...");
+            popularSecretaria();
+        }
+    }
+    
+    static void popularSecretaria() {
+        try {
+            Secretaria secretaria = new Secretaria("seubarriga", "seubarriga@email.com", "seubarriga");
+            secretarias.add(secretaria);
+            secretariaDAO.salvar(secretaria);
+            out.println("Secretária criada com sucesso!");
+            out.println("Credenciais: seubarriga (código " + secretaria.getCodPessoa() + ", senha: seubarriga)");
+        } catch (Exception e) {
+            out.println("Erro ao criar secretária: " + e.getMessage());
         }
     }
 
@@ -143,7 +153,14 @@ public class App {
             opcao = in.nextInt();
 
             switch (opcao) {
-                case 1 -> out.println("Opção inválida!");
+                case 1 -> {
+                    if (!secretarias.isEmpty()) {
+                        View.SecretariaInterface secretariaInterface = new View.SecretariaInterface(in, secretarias.get(0));
+                        secretariaInterface.menuSecretaria();
+                    } else {
+                        out.println("Nenhuma secretária cadastrada no sistema.");
+                    }
+                }
                 case 2 -> rotinaProfessor();
                 case 3 -> out.println("Aluno");
                 default -> out.println("Opção inválida!");
