@@ -18,8 +18,10 @@ import Data.DAO.PlanoDeEnsinoDAO;
 import Data.DAO.ProfessorDAO;
 import Data.DAO.SecretariaDAO;
 import Enum.TipoAcesso;
+import View.AlunoInterface;
 import View.Menu;
 import View.ProfessorInterface;
+import View.SecretariaInterface;
 
 public class App {
     static PrintStream out = System.out;
@@ -59,6 +61,13 @@ public class App {
                         "alice@jabberwock",
                         "alice");
                 secretarias.add(novaSecretaria);
+                
+                out.println("=== SISTEMA INICIALIZADO ===");
+                out.println("Secretária padrão criada:");
+                out.println("Nome: " + novaSecretaria.getNome());
+                out.println("Código de Pessoa: " + novaSecretaria.getCodPessoa());
+                out.println("Senha: alice");
+                out.println("===============================");
             }
         } catch (Exception e) {
             out.println(e.getMessage() + " Ao inicializar usuários.");
@@ -112,6 +121,22 @@ public class App {
         return null;
     }
 
+    static void rotinaSecretaria() {
+        try {
+            Secretaria secretaria = (Secretaria) direcionaAutenticacao(TipoAcesso.SECRETARIA);
+            out.println("Bem-vinda, " + secretaria.getNome() + "!");
+
+            SecretariaInterface secretariaInterface = new SecretariaInterface(
+                in, secretaria, alunos, professores, secretarias, 
+                disciplinas, cursos, curriculos);
+            secretariaInterface.menu();
+
+        } catch (Exception e) {
+            out.println(e.getMessage());
+            return;
+        }
+    }
+
     static void rotinaProfessor() {
         try {
             Professor professor = (Professor) direcionaAutenticacao(TipoAcesso.PROFESSOR);
@@ -119,6 +144,20 @@ public class App {
 
             ProfessorInterface professorInterface = new ProfessorInterface(in, professor);
             professorInterface.menu();
+
+        } catch (Exception e) {
+            out.println(e.getMessage());
+            return;
+        }
+    }
+
+    static void rotinaAluno() {
+        try {
+            Aluno aluno = (Aluno) direcionaAutenticacao(TipoAcesso.ALUNO);
+            out.println("Bem-vindo(a), " + aluno.getNome() + "!");
+
+            AlunoInterface alunoInterface = new AlunoInterface(in, aluno, disciplinas);
+            alunoInterface.menu();
 
         } catch (Exception e) {
             out.println(e.getMessage());
@@ -143,9 +182,9 @@ public class App {
             opcao = in.nextInt();
 
             switch (opcao) {
-                case 1 -> out.println("Opção inválida!");
+                case 1 -> rotinaSecretaria();
                 case 2 -> rotinaProfessor();
-                case 3 -> out.println("Aluno");
+                case 3 -> rotinaAluno();
                 default -> out.println("Opção inválida!");
             }
         } while (opcao != 0);

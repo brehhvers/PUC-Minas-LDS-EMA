@@ -99,6 +99,20 @@ public class Disciplina implements IEfetivavel, IPersistivel {
         return this.alunos;
     }
 
+    public ArrayList<Aluno> getAlunosMatriculados() {
+        return this.alunos;
+    }
+
+    public void toggleStatus() {
+        if (this.status == StatusDisciplina.ATIVA) {
+            this.status = StatusDisciplina.CANCELADA;
+        } else if (this.status == StatusDisciplina.CANCELADA) {
+            this.status = StatusDisciplina.ATIVA;
+        } else if (this.status == StatusDisciplina.PREVISTA) {
+            this.status = StatusDisciplina.ATIVA;
+        }
+    }
+
     private boolean possuiVagas() {
         return this.alunos.size() < QTDE_MAX_ALUNOS;
     }
