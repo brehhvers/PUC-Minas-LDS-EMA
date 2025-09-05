@@ -958,7 +958,12 @@ public class SecretariaInterface {
         if (!cursoStr.trim().isEmpty()) {
             try {
                 int idCurso = Integer.parseInt(cursoStr);
-                novoCurso = secretaria.buscarCursoPorId(idCurso);
+                try {
+                    novoCurso = secretaria.buscarCursoPorId(idCurso);
+                } catch (Exception e) {
+                    System.out.println("Erro ao buscar curso: " + e.getMessage());
+                    return;
+                }
                 if (novoCurso == null) {
                     System.out.println("Curso não encontrado!");
                     return;

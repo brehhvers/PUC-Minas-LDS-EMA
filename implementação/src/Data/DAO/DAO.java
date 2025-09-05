@@ -22,10 +22,23 @@ public abstract class DAO<T> {
 
     public void salvar(IPersistivel objeto) throws IOException {
         try (BufferedWriter escritor = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(caminhoArquivo, false), "UTF-8"))) {
+                new OutputStreamWriter(new FileOutputStream(caminhoArquivo, true), "UTF-8"))) {
 
             escritor.write(objeto.toPersist());
             escritor.newLine();
+            escritor.flush();
+        }
+    }
+
+    public void salvarTodos(ArrayList<? extends IPersistivel> objetos) throws IOException {
+        try (BufferedWriter escritor = new BufferedWriter(
+                new OutputStreamWriter(new FileOutputStream(caminhoArquivo, false), "UTF-8"))) {
+
+            for (IPersistivel obj : objetos) {
+                escritor.write(obj.toPersist());
+                escritor.newLine();
+            }
+            
             escritor.flush();
         }
     }
@@ -37,7 +50,9 @@ public abstract class DAO<T> {
 
             String linha;
             while ((linha = leitor.readLine()) != null) {
-                objetos.add(parse(linha));
+                if (!linha.trim().isEmpty()) {
+                    objetos.add(parse(linha));
+                }
             }
         }
 

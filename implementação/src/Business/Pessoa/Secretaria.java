@@ -22,6 +22,10 @@ import Enum.TipoDisciplina;
 import Interface.IEfetivavel;
 
 public class Secretaria extends Usuario {
+    private static AlunoDAO alunoDAO = AlunoDAO.getDAO();
+    private static ProfessorDAO professorDAO = ProfessorDAO.getDAO();
+    private static SecretariaDAO secretariaDAO = SecretariaDAO.getDAO();
+    
     public Secretaria() {
         super();
     }
@@ -43,15 +47,33 @@ public class Secretaria extends Usuario {
     }
 
     public Aluno cadastrarAluno(String nome, String email, String senha) {
-        return new Aluno(nome, email, senha);
+        Aluno aluno = new Aluno(nome, email, senha);
+        try {
+            alunoDAO.salvar(aluno);
+        } catch (Exception e) {
+            System.err.println("Erro ao salvar aluno: " + e.getMessage());
+        }
+        return aluno;
     }
 
     public Professor cadastrarProfessor(String nome, String email, String senha) {
-        return new Professor(nome, email, senha);
+        Professor professor = new Professor(nome, email, senha);
+        try {
+            professorDAO.salvar(professor);
+        } catch (Exception e) {
+            System.err.println("Erro ao salvar professor: " + e.getMessage());
+        }
+        return professor;
     }
 
     public Secretaria cadastrarSecretaria(String nome, String email, String senha) {
-        return new Secretaria(nome, email, senha);
+        Secretaria secretaria = new Secretaria(nome, email, senha);
+        try {
+            secretariaDAO.salvar(secretaria);
+        } catch (Exception e) {
+            System.err.println("Erro ao salvar secretária: " + e.getMessage());
+        }
+        return secretaria;
     }
 
     /**
