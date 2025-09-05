@@ -7,11 +7,11 @@ import Business.Disciplina;
 import Business.Pessoa.Aluno;
 import Business.Pessoa.Professor;
 
-public class ProfessorInterface {
+public class ProfessorView {
     private Scanner in;
     private Professor professor;
 
-    public ProfessorInterface(Scanner in, Professor professor) {
+    public ProfessorView(Scanner in, Professor professor) {
         this.in = in;
         this.professor = professor;
     }

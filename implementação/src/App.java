@@ -19,9 +19,9 @@ import Data.DAO.ProfessorDAO;
 import Data.DAO.SecretariaDAO;
 import Enum.TipoAcesso;
 import Enum.TipoDisciplina;
-import View.AlunoInterface;
+import View.AlunoView;
 import View.Menu;
-import View.ProfessorInterface;
+import View.ProfessorView;
 import View.SecretariaInterface;
 
 public class App {
@@ -272,7 +272,7 @@ public class App {
             Aluno aluno = (Aluno) direcionaAutenticacao(TipoAcesso.ALUNO);
             out.println("Bem-vindo(a), " + aluno.getNome() + "!");
 
-            AlunoInterface alunoInterface = new AlunoInterface(in, aluno, disciplinas);
+            AlunoView alunoInterface = new AlunoView(in, aluno, disciplinas);
             alunoInterface.menu();
 
         } catch (Exception e) {
@@ -286,7 +286,7 @@ public class App {
             Professor professor = (Professor) direcionaAutenticacao(TipoAcesso.PROFESSOR);
             out.println("Bem-vindo(a), " + professor.getNome() + "!");
 
-            ProfessorInterface professorInterface = new ProfessorInterface(in, professor);
+            ProfessorView professorInterface = new ProfessorView(in, professor);
             professorInterface.menu();
 
         } catch (Exception e) {

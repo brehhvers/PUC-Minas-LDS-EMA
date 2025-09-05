@@ -9,12 +9,12 @@ import Business.PlanoDeEnsino;
 import Business.Pessoa.Aluno;
 import Enum.StatusPlano;
 
-public class AlunoInterface {
+public class AlunoView {
     private Scanner in;
     private Aluno aluno;
     private ArrayList<Disciplina> disciplinas;
 
-    public AlunoInterface(Scanner in, Aluno aluno, ArrayList<Disciplina> disciplinas) {
+    public AlunoView(Scanner in, Aluno aluno, ArrayList<Disciplina> disciplinas) {
         this.in = in;
         this.aluno = aluno;
         this.disciplinas = disciplinas;
