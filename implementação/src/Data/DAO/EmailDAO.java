@@ -1,7 +1,7 @@
 package Data.DAO;
 
 public class EmailDAO extends NotificadorDAO {
-    private static final String CAMINHO_ARQUIVO = "implementação/src/Data/File/email.txt";
+    private static final String CAMINHO_ARQUIVO = "src/Data/File/email.txt";
     private static EmailDAO INSTANCIA;
 
     private EmailDAO() {

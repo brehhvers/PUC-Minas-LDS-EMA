@@ -9,7 +9,7 @@ import Business.Curriculo;
 import Business.Curso;
 
 public class CurriculoDAO extends DAO<Curriculo> {
-    private static final String CAMINHO_ARQUIVO = "implementação/src/Data/File/curriculo.txt";
+    private static final String CAMINHO_ARQUIVO = "src/Data/File/curriculo.txt";
     private static CurriculoDAO INSTANCIA;
 
     private Map<Integer, Curriculo> cache = new HashMap<>();

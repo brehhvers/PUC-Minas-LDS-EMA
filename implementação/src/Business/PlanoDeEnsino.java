@@ -99,10 +99,19 @@ public class PlanoDeEnsino implements IEfetivavel, IGerenciavel<Disciplina, Inte
         final long MAX_OPTATIVAS = 2L;
 
         Curriculo curriculo = this.aluno.getCurriculo();
+        if (curriculo == null) {
+            throw new IllegalStateException(
+                    "Aluno de matrícula " + this.aluno.getMatricula() + " não possui currículo associado.");
+        }
 
         if (!curriculo.getDisciplinas().contains(disciplina.getNome())) {
             throw new IllegalArgumentException(
                     "Não é possível adicionar esta disciplina: ela não faz parte do currículo do aluno.");
+        }
+
+        if (this.disciplinas.contains(disciplina)) {
+            throw new IllegalArgumentException(
+                    "Esta disciplina já foi previamente adicionada a este plano de ensino.");
         }
 
         if (this.disciplinas.size() == MAX_DISCIPLINAS) {
